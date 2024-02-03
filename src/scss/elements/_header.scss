@@ -1,0 +1,14 @@
+.navbar-main {
+  background-color: $nav-bg-color !important;
+  padding: 10px 20px;
+  .navbar-brand {
+    font-weight: 600;
+    color: orangered;
+    span {
+      color: #fff;
+    }
+  }
+  .navbar-collapse {
+    justify-content: flex-end;
+  }
+}
