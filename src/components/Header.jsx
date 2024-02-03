@@ -1,4 +1,4 @@
-function Header() {
+const Header = () => {
   return (
     <nav className="navbar navbar-expand-lg bg-body-tertiary navbar-main">
       <div className="container-fluid">
@@ -35,7 +35,7 @@ function Header() {
             </li>
             <li className="nav-item">
               <a className="nav-link" href="#">
-                Today's News
+                Today&apos;s News
               </a>
             </li>
           </ul>
@@ -43,6 +43,6 @@ function Header() {
       </div>
     </nav>
   );
-}
+};
 
 export default Header;

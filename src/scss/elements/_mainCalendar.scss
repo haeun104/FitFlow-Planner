@@ -1,0 +1,27 @@
+.main-calendar {
+  max-width: 500px;
+  margin: 50px auto;
+  padding: 40px 20px;
+  font-family: $secondary-font;
+  .p-datepicker-header {
+    margin-bottom: 10px;
+  }
+  .p-datepicker-calendar {
+    tr {
+      height: 25px;
+    }
+    th {
+      text-align: center;
+    }
+  }
+  .p-datepicker-prev,
+  .p-datepicker-next {
+    border: none;
+    background-color: #fff;
+    color: $accent-color;
+  }
+  .p-datepicker-today[data-p-today="true"] {
+    color: $accent-color;
+    text-decoration: underline;
+  }
+}
