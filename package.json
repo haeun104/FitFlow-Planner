@@ -12,6 +12,7 @@
   "dependencies": {
     "primereact": "^10.4.0",
     "react": "^18.2.0",
+    "react-calendar": "^4.8.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.3.0",
     "sass": "1.67.0"

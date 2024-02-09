@@ -1,18 +1,28 @@
-import { Calendar } from "primereact/calendar";
+import Calendar from "react-calendar";
 import { useState } from "react";
 import { getFormattedDate } from "../utils/utils";
+import 'react-calendar/dist/Calendar.css';
 
 const MainCalendar = ({ updateClickedDate }) => {
-  const [date, setDate] = useState(null);
+  const [date, setDate] = useState(new Date());
 
-  const clickDate = (e) => {
-    setDate(getFormattedDate(e.target.value));
-    updateClickedDate(getFormattedDate(e.target.value));
+  const randomDate = "2024-02-02";
+
+  const clickDate = (date) => {
+    console.log(date);
+    setDate(date);
+    updateClickedDate(getFormattedDate(date));
+  };
+
+  const addClass = ({ date }) => {
+    if (getFormattedDate(date) === randomDate) {
+      return "sampleStyling";
+    }
   };
 
   return (
-    <div className="card flex justify-content-center main-calendar">
-      <Calendar value={date} onChange={(e) => clickDate(e)} inline />
+    <div className="main-calendar">
+      <Calendar value={date} onChange={clickDate} tileClassName={addClass} />
     </div>
   );
 };

@@ -1,0 +1,73 @@
+.plan-form {
+  padding: 20px 30px;
+  font-family: $secondary-font;
+  .btn-box {
+    .btn-plan-form {
+      margin-right: 5px;
+      margin-bottom: 5px;
+      border-radius: 20px;
+      border: 1px solid $border-color;
+    }
+    .clicked {
+      background-color: $button-color;
+    }
+  }
+  .exercises-list {
+    line-height: 25px;
+  }
+  .btn-add-exercise {
+    border: 1px solid $button-color;
+    margin: 10px 0;
+  }
+  .exercise-plan {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .exercise-save {
+    display: flex;
+    align-items: flex-end;
+    .btn-add-exercise {
+      margin-bottom: 0;
+      height: 60%;
+      background-color: $accent-color;
+      border: none;
+      color: #fff;
+    }
+  }
+  .error-message {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: $accent-color;
+  }
+
+  .added-exercises {
+    .added-exercises-title {
+      text-align: left;
+      margin: 10px 0;
+    }
+    .col {
+      line-height: 30px;
+      text-align: center;
+      border-bottom: 1px solid $border-color;
+    }
+
+    .btn-delete {
+      cursor: pointer;
+    }
+  }
+  .btn-form-box {
+    margin: 20px 0;
+    .btn-form-save {
+      background-color: $accent-color;
+      color: #fff;
+      padding: 10px 30px;
+      margin-right: 20px;
+    }
+    .btn-form-cancel {
+      border: 1px solid $border-color;
+      padding: 10px 30px;
+    }
+  }
+}
