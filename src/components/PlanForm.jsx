@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import exerciseList from "../data/exerciseList";
+import { useNavigate } from "react-router-dom";
 
 const PlanForm = () => {
   const [exercises, setExercises] = useState([]);
@@ -17,6 +18,8 @@ const PlanForm = () => {
   const [validCheck, setValidCheck] = useState(false);
   const [error, setError] = useState([]);
   const [finalLists, setFinalLists] = useState([]);
+
+  const navigate = useNavigate();
 
   // DB 에 존재하는 카테고리 목록 추출 (중복 제거)
   const categoryList = [...new Set(exerciseList.map((item) => item.category))];
@@ -103,6 +106,11 @@ const PlanForm = () => {
   const deleteList = (id) => {
     const deletedLists = finalLists.filter((list) => list.id !== id);
     setFinalLists(deletedLists);
+  };
+
+  // 취소 버튼 클릭 시 이전 페이지로 돌아감
+  const goBack = () => {
+    navigate(-1);
   };
 
   return (
@@ -255,7 +263,7 @@ const PlanForm = () => {
           </ul>
         </div>
       )}
-      {validCheck && (
+      {validCheck ? (
         <div className="mb-3 added-exercises">
           <h3 className="added-exercises-title">Added Exercises</h3>
           <div className="row row-cols-5">
@@ -263,7 +271,7 @@ const PlanForm = () => {
             <div className="col">Sets</div>
             <div className="col">Minutes</div>
             <div className="col">Weight(kg)</div>
-            <div className="col btn-delete"></div>
+            <div className="col"></div>
           </div>
           {finalLists.map((list) => (
             <div className="row row-cols-5" key={list.id}>
@@ -283,10 +291,24 @@ const PlanForm = () => {
             <button type="submit" className="btn btn-form-save">
               Save
             </button>
-            <button type="button" className="btn btn-form-cancel">
+            <button
+              type="button"
+              className="btn btn-form-cancel"
+              onClick={goBack}
+            >
               Cancel
             </button>
           </div>
+        </div>
+      ) : (
+        <div className="mb-3 btn-form-box">
+          <button
+            type="button"
+            className="btn btn-form-cancel"
+            onClick={goBack}
+          >
+            Cancel
+          </button>
         </div>
       )}
     </form>
