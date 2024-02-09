@@ -1,7 +1,6 @@
 import { useState } from "react";
 import MainCalendar from "../components/MainCalendar";
 import MainModal from "../components/MainModal";
-import Header from "../components/header";
 
 const mockData = [
   {
@@ -35,7 +34,7 @@ const mockData = [
 ];
 
 const MainPage = () => {
-  const [filteredData, setFilteredData] = useState();
+  const [filteredData, setFilteredData] = useState([]);
   const [clickedDate, setClickedDate] = useState();
 
   const filterData = (date) => {
@@ -51,11 +50,10 @@ const MainPage = () => {
 
   return (
     <>
-      <Header />
       <MainCalendar updateClickedDate={updateClickedDate} />
-      {filteredData ? (
+      {filteredData.length > 0 && (
         <MainModal filteredData={filteredData} clickedDate={clickedDate} />
-      ) : null}
+      )}
     </>
   );
 };

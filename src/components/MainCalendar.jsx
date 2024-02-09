@@ -12,8 +12,7 @@ const MainCalendar = ({ updateClickedDate }) => {
 
   return (
     <div className="card flex justify-content-center main-calendar">
-      {/* <Calendar value={date} onChange={(e) => clickDate(e.value)} inline /> */}
-      <Calendar value={date} onChange={clickDate} inline />
+      <Calendar value={date} onChange={(e) => clickDate(e)} inline />
     </div>
   );
 };
