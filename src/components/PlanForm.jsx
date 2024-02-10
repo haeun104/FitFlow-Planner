@@ -1,19 +1,21 @@
 import { useEffect, useState } from "react";
 import exerciseList from "../data/exerciseList";
 import { useNavigate } from "react-router-dom";
+import { db } from "../data/firebase";
+import { collection, addDoc } from "firebase/firestore";
 
 const PlanForm = () => {
   const [exercises, setExercises] = useState([]);
   const [category, setCategory] = useState("Chest");
   const [planOpen, setPlanOpen] = useState(false);
   const [singleList, setSingleList] = useState({
-    id: 0,
     date: "",
     category: "",
     name: "",
     sets: 0,
     minutes: 0,
     weight: 0,
+    isCompleted: false,
   });
   const [validCheck, setValidCheck] = useState(false);
   const [error, setError] = useState([]);
@@ -79,7 +81,7 @@ const PlanForm = () => {
       setError((prev) => [
         ...prev,
         "One between Sets and Minutes must be more than zero.",
-      ]); // 왜 빈칸인데도 0으로 인식하는건지?
+      ]); // 왜 빈칸인데도 0으로 인식하는건지 확인 필요
     }
     if (singleList.sets === "" && singleList.minutes === "") {
       validation = false;
@@ -96,7 +98,6 @@ const PlanForm = () => {
       setValidCheck(true);
       setSingleList((prev) => ({
         ...prev,
-        id: finalLists.length + 1,
       }));
       setFinalLists((prev) => [...prev, singleList]);
     }
@@ -112,6 +113,18 @@ const PlanForm = () => {
   const goBack = () => {
     navigate(-1);
   };
+
+  // Firebase에 목록을 추가
+  async function addDataToDb(lists) {
+    try {
+      for (let list of lists) {
+        await addDoc(collection(db, "plan"), list);
+      }
+      console.log("Lists added to DB successfully.");
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
   return (
     <form action="/" className="card plan-form">
@@ -153,9 +166,9 @@ const PlanForm = () => {
         ))}
       </div>
       <ul>
-        {exercises.map((ex) => (
+        {exercises.map((ex, index) => (
           <li
-            key={ex.id}
+            key={index}
             className="exercises-list"
             onClick={() => addToList(ex.name, ex.category)}
           >
@@ -273,8 +286,8 @@ const PlanForm = () => {
             <div className="col">Weight(kg)</div>
             <div className="col"></div>
           </div>
-          {finalLists.map((list) => (
-            <div className="row row-cols-5" key={list.id}>
+          {finalLists.map((list, index) => (
+            <div className="row row-cols-5" key={index}>
               <div className="col">{list.name}</div>
               <div className="col">{list.sets}</div>
               <div className="col">{list.minutes}</div>
@@ -288,7 +301,12 @@ const PlanForm = () => {
             </div>
           ))}
           <div className="mb-3 btn-form-box">
-            <button type="submit" className="btn btn-form-save">
+            <button
+              type="button"
+              className="btn btn-form-save"
+              onClick={() => addDataToDb(finalLists)}
+              style={{ display: finalLists.length === 0 && "none" }}
+            >
               Save
             </button>
             <button

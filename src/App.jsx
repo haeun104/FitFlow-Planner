@@ -4,20 +4,45 @@ import MainPage from "./pages/MainPage";
 import AddPlan from "./pages/AddPlan";
 import UpdatePlan from "./pages/UpdatePlan";
 import EditPlan from "./pages/EditPlan";
+import { onSnapshot, collection } from "firebase/firestore";
+import { db, fetchDataFromDb } from "./data/firebase";
+import { useEffect, useState } from "react";
 
 function App() {
-  return (
-    <BrowserRouter>
-      <Header />
-      <Outlet />
-      <Routes>
-        <Route path="/" element={<MainPage />} />
-        <Route path="/new" element={<AddPlan />} />
-        <Route path="/update" element={<UpdatePlan />} />
-        <Route path="/edit/:id" element={<EditPlan />} />
-      </Routes>
-    </BrowserRouter>
-  );
+  const [dbList, setDbList] = useState();
+
+  useEffect(() => {
+    const unsubscribe = onSnapshot(collection(db, "plan"), (snapshot) => {
+      const newData = [];
+      snapshot.forEach((doc) => {
+        newData.push({ ...doc.data(), id: doc.id });
+      });
+      setDbList(newData);
+    });
+    return () => unsubscribe();
+  }, []);
+
+  if (!dbList) {
+    return (
+      <>
+        <Header />
+        <p>Loading...</p>
+      </>
+    );
+  } else {
+    return (
+      <BrowserRouter>
+        <Header />
+        <Outlet />
+        <Routes>
+          <Route path="/" element={<MainPage dbList={dbList} />} />
+          <Route path="/new" element={<AddPlan />} />
+          <Route path="/update" element={<UpdatePlan />} />
+          <Route path="/edit/:id" element={<EditPlan />} />
+        </Routes>
+      </BrowserRouter>
+    );
+  }
 }
 
 export default App;
