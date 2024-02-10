@@ -33,11 +33,6 @@ const Header = () => {
                 Update Plan
               </a>
             </li>
-            <li className="nav-item">
-              <a className="nav-link" href="/articles">
-                Today&apos;s News
-              </a>
-            </li>
           </ul>
         </div>
       </div>

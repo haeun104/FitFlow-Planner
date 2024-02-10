@@ -3,7 +3,6 @@ import Header from "./components/header";
 import MainPage from "./pages/MainPage";
 import AddPlan from "./pages/AddPlan";
 import UpdatePlan from "./pages/UpdatePlan";
-import TodayNews from "./pages/TodayNews";
 import EditPlan from "./pages/EditPlan";
 
 function App() {
@@ -16,7 +15,6 @@ function App() {
         <Route path="/new" element={<AddPlan />} />
         <Route path="/update" element={<UpdatePlan />} />
         <Route path="/edit/:id" element={<EditPlan />} />
-        <Route path="/articles" element={<TodayNews />} />
       </Routes>
     </BrowserRouter>
   );
