@@ -1,17 +1,15 @@
 import { useState } from "react";
 
-const MainModal = ({ filteredData, clickedDate }) => {
-  const [isModalOpen, setIsModalOpen] = useState(true);
-
+const MainModal = ({ filteredData, clickedDate, click, setClick}) => {
   const closeModal = () => {
-    setIsModalOpen(false);
+    setClick(false);
   };
 
   return (
     <div
       className="modal"
       tabIndex="-1"
-      style={{ display: isModalOpen ? "block" : "none" }}
+      style={{ display: click ? "block" : "none" }}
     >
       <div className="modal-dialog">
         <div className="modal-content">
@@ -27,11 +25,12 @@ const MainModal = ({ filteredData, clickedDate }) => {
           </div>
           <div className="modal-body">
             <div className="modal-lists-wrapper">
-              {filteredData.map((item, index) => (
-                <div key={index} className="list">
-                  <div>{item.exercisePart}</div>
-                  <div>{item.exerciseName}</div>
+              {filteredData.map((item) => (
+                <div key={item.id} className="list">
+                  <div>{item.category}</div>
+                  <div>{item.name}</div>
                   <div>{item.sets} sets</div>
+                  <div>{item.minutes} mins</div>
                   <div>{item.weight} kg</div>
                 </div>
               ))}

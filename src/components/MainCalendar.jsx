@@ -6,8 +6,6 @@ import "react-calendar/dist/Calendar.css";
 const MainCalendar = ({ updateClickedDate, dbList }) => {
   const [date, setDate] = useState(new Date());
 
-  const randomDate = "2024-02-02";
-
   const completeDays = dbList.filter((item) => item.isCompleted);
   const incompleteDays = dbList.filter((item) => !item.isCompleted);
 
