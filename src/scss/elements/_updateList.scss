@@ -1,0 +1,39 @@
+.summary-list {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  .summary-list-info {
+    display: flex;
+    gap: 20px;
+    cursor: pointer;
+  }
+}
+
+.detail-list {
+  margin: 10px 0;
+  background-color: white;
+  border: 1px solid $border-color;
+  padding: 10px 0;
+  .col {
+    margin: 5px;
+  }
+  .result-msg {
+    flex: 2;
+  }
+  .detail-list-finish {
+    display: flex;
+    align-items: center;
+  }
+}
+
+.summary-list .btn,
+.detail-list .btn {
+  border: 1px solid $border-color;
+  border-radius: 20px;
+  font-size: 14px;
+  margin-left: 10px;
+  &:hover {
+    background-color: $accent-color;
+    color: white;
+  }
+}

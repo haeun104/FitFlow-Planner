@@ -1,8 +1,9 @@
 // Reset
 @import "./settings/reset";
 
-// Variables
+// Variables & Common styles
 @import "./settings/variables";
+@import "./elements/buttons";
 
 //  Elements
 @import "./elements/base";
@@ -10,3 +11,5 @@
 @import "./elements/mainCalendar";
 @import "./elements/mainModal";
 @import "./elements/planForm";
+@import "./elements/updateList";
+@import "./elements/updatePlan";

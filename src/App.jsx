@@ -5,7 +5,7 @@ import AddPlan from "./pages/AddPlan";
 import UpdatePlan from "./pages/UpdatePlan";
 import EditPlan from "./pages/EditPlan";
 import { onSnapshot, collection } from "firebase/firestore";
-import { db, fetchDataFromDb } from "./data/firebase";
+import { db } from "./data/firebase";
 import { useEffect, useState } from "react";
 
 function App() {
@@ -37,7 +37,7 @@ function App() {
         <Routes>
           <Route path="/" element={<MainPage dbList={dbList} />} />
           <Route path="/new" element={<AddPlan />} />
-          <Route path="/update" element={<UpdatePlan dbList={dbList}/>} />
+          <Route path="/update" element={<UpdatePlan dbList={dbList} />} />
           <Route path="/edit/:id" element={<EditPlan />} />
         </Routes>
       </BrowserRouter>
