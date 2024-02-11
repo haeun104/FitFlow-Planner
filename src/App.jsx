@@ -37,7 +37,7 @@ function App() {
         <Routes>
           <Route path="/" element={<MainPage dbList={dbList} />} />
           <Route path="/new" element={<AddPlan />} />
-          <Route path="/update" element={<UpdatePlan />} />
+          <Route path="/update" element={<UpdatePlan dbList={dbList}/>} />
           <Route path="/edit/:id" element={<EditPlan />} />
         </Routes>
       </BrowserRouter>

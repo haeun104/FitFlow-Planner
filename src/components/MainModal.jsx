@@ -1,6 +1,4 @@
-import { useState } from "react";
-
-const MainModal = ({ filteredData, clickedDate, click, setClick}) => {
+const MainModal = ({ filteredData, clickedDate, click, setClick }) => {
   const closeModal = () => {
     setClick(false);
   };

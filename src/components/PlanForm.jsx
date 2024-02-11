@@ -15,7 +15,8 @@ const PlanForm = () => {
     sets: 0,
     minutes: 0,
     weight: 0,
-    isCompleted: false,
+    isDone: false,
+    isClosed: false,
   });
   const [validCheck, setValidCheck] = useState(false);
   const [error, setError] = useState([]);
@@ -124,6 +125,12 @@ const PlanForm = () => {
     } catch (error) {
       console.error(error);
     }
+    setFinalLists([]);
+    setPlanOpen(false);
+    setSingleList((prev) => ({
+      ...prev,
+      date: "",
+    }));
   }
 
   return (

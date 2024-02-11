@@ -6,8 +6,8 @@ import "react-calendar/dist/Calendar.css";
 const MainCalendar = ({ updateClickedDate, dbList }) => {
   const [date, setDate] = useState(new Date());
 
-  const completeDays = dbList.filter((item) => item.isCompleted);
-  const incompleteDays = dbList.filter((item) => !item.isCompleted);
+  const completeDays = dbList.filter((item) => item.isClosed);
+  const incompleteDays = dbList.filter((item) => !item.isClosed);
 
   const listOfcompleteDays = [
     ...new Set(completeDays.map((item) => item.date)),
