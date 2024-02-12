@@ -1,10 +1,7 @@
 import { useEffect, useState } from "react";
 import exerciseList from "../data/exerciseList";
-import { useNavigate } from "react-router-dom";
-import { db } from "../data/firebase";
-import { collection, addDoc } from "firebase/firestore";
 
-const PlanForm = () => {
+const PlanForm = ({ setValidCheck, setMultipleList }) => {
   const [exercises, setExercises] = useState([]);
   const [category, setCategory] = useState("Chest");
   const [planOpen, setPlanOpen] = useState(false);
@@ -18,11 +15,7 @@ const PlanForm = () => {
     isDone: false,
     isClosed: false,
   });
-  const [validCheck, setValidCheck] = useState(false);
   const [error, setError] = useState([]);
-  const [finalLists, setFinalLists] = useState([]);
-
-  const navigate = useNavigate();
 
   // DB 에 존재하는 카테고리 목록 추출 (중복 제거)
   const categoryList = [...new Set(exerciseList.map((item) => item.category))];
@@ -96,45 +89,16 @@ const PlanForm = () => {
       setError((prev) => [...prev, "Value must be more than zero."]);
     }
     if (validation) {
-      setValidCheck(true);
       setSingleList((prev) => ({
         ...prev,
       }));
-      setFinalLists((prev) => [...prev, singleList]);
+      setValidCheck(validation);
+      setMultipleList((prev) => [...prev, singleList]);
     }
   };
-
-  //  삭제 버튼 클릭 시 목록에서 삭제
-  const deleteList = (id) => {
-    const deletedLists = finalLists.filter((list) => list.id !== id);
-    setFinalLists(deletedLists);
-  };
-
-  // 취소 버튼 클릭 시 이전 페이지로 돌아감
-  const goBack = () => {
-    navigate(-1);
-  };
-
-  // Firebase에 목록을 추가
-  async function addDataToDb(lists) {
-    try {
-      for (let list of lists) {
-        await addDoc(collection(db, "plan"), list);
-      }
-      console.log("Lists added to DB successfully.");
-    } catch (error) {
-      console.error(error);
-    }
-    setFinalLists([]);
-    setPlanOpen(false);
-    setSingleList((prev) => ({
-      ...prev,
-      date: "",
-    }));
-  }
 
   return (
-    <form action="/" className="card plan-form">
+    <form action="/" className="plan-form">
       <div className="mb-3">
         <label htmlFor="date" className="form-label">
           Date
@@ -281,59 +245,6 @@ const PlanForm = () => {
               <li key={index}>{err}</li>
             ))}
           </ul>
-        </div>
-      )}
-      {validCheck ? (
-        <div className="mb-3 added-exercises">
-          <h3 className="added-exercises-title">Added Exercises</h3>
-          <div className="row row-cols-5">
-            <div className="col">Name</div>
-            <div className="col">Sets</div>
-            <div className="col">Minutes</div>
-            <div className="col">Weight(kg)</div>
-            <div className="col"></div>
-          </div>
-          {finalLists.map((list, index) => (
-            <div className="row row-cols-5" key={index}>
-              <div className="col">{list.name}</div>
-              <div className="col">{list.sets}</div>
-              <div className="col">{list.minutes}</div>
-              <div className="col">{list.weight}</div>
-              <div
-                className="col btn-delete"
-                onClick={() => deleteList(list.id)}
-              >
-                <i className="fa-solid fa-trash-can"></i>
-              </div>
-            </div>
-          ))}
-          <div className="mb-3 btn-form-box">
-            <button
-              type="button"
-              className="btn btn-form-save"
-              onClick={() => addDataToDb(finalLists)}
-              style={{ display: finalLists.length === 0 && "none" }}
-            >
-              Save
-            </button>
-            <button
-              type="button"
-              className="btn btn-form-cancel"
-              onClick={goBack}
-            >
-              Cancel
-            </button>
-          </div>
-        </div>
-      ) : (
-        <div className="mb-3 btn-form-box">
-          <button
-            type="button"
-            className="btn btn-form-cancel"
-            onClick={goBack}
-          >
-            Cancel
-          </button>
         </div>
       )}
     </form>

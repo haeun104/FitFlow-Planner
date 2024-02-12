@@ -1,0 +1,29 @@
+.added-exercises {
+  .added-exercises-title {
+    text-align: left;
+    margin: 10px 0;
+  }
+  .col {
+    line-height: 30px;
+    text-align: center;
+    border-bottom: 1px solid $border-color;
+  }
+
+  .btn-delete {
+    cursor: pointer;
+  }
+}
+
+.btn-form-box {
+  margin: 20px 0;
+  .btn-form-save {
+    background-color: $accent-color;
+    color: #fff;
+    padding: 10px 30px;
+    margin-right: 20px;
+  }
+  .btn-form-cancel {
+    border: 1px solid $border-color;
+    padding: 10px 30px;
+  }
+}
