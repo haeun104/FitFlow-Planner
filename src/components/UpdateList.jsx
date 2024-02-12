@@ -1,8 +1,11 @@
 import { useState } from "react";
 import UpdateDetails from "./UpdateDetails";
+import { useNavigate } from "react-router-dom";
 
 const UpdateList = ({ summarizedList, dbList }) => {
   const [detailOpen, setDetailOpen] = useState(false);
+
+  const navigate = useNavigate();
 
   const handleDetailOpen = () => {
     setDetailOpen(!detailOpen);
@@ -15,6 +18,11 @@ const UpdateList = ({ summarizedList, dbList }) => {
   const getDetails = (date) => {
     const filteredList = dbList.filter((item) => item.date === date);
     return filteredList;
+  };
+
+  // Edit 페이지로 이동
+  const goEditPage = (selectedDate) => {
+    navigate(`/edit/${selectedDate}`);
   };
 
   return (
@@ -33,7 +41,11 @@ const UpdateList = ({ summarizedList, dbList }) => {
           >
             Update
           </button>
-          <button type="button" className="btn btn-edit">
+          <button
+            type="button"
+            className="btn btn-edit"
+            onClick={() => goEditPage(date)}
+          >
             Edit
           </button>
           <button type="button" className="btn btn-delete">
