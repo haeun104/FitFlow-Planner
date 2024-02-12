@@ -1,27 +1,20 @@
 import { useState } from "react";
+import UpdateDetails from "./UpdateDetails";
 
 const UpdateList = ({ summarizedList, dbList }) => {
   const [detailOpen, setDetailOpen] = useState(false);
-  const [checkboxId, setCheckboxId] = useState([]);
 
   const handleDetailOpen = () => {
     setDetailOpen(!detailOpen);
   };
-  //   console.log(summarizedList);
+  // console.log(dbList);
 
   const { date, category, name } = summarizedList;
 
+  // 클릭한 일자의 상세 데이터를 가져옴
   const getDetails = (date) => {
     const filteredList = dbList.filter((item) => item.date === date);
     return filteredList;
-  };
-
-  const handleCheckbox = (id) => {
-    setCheckboxId((prev) => [...prev, id]);
-  };
-
-  const sendCheckboxIdToDB= () => {
-    console.log(checkboxId);
   };
 
   return (
@@ -48,55 +41,11 @@ const UpdateList = ({ summarizedList, dbList }) => {
           </button>
         </div>
       </li>
-      <div
-        className="container text-center detail-list"
-        style={{ display: detailOpen ? "block" : "none" }}
-      >
-        <div className="row">
-          <div className="col">Category</div>
-          <div className="col">Name</div>
-          <div className="col">Sets</div>
-          <div className="col">Minutes</div>
-          <div className="col">Weight(kg)</div>
-          <div className="col">Completion</div>
-        </div>
-        {getDetails(date).map((item) => (
-          <div key={item.id} className="row">
-            <div className="col">{item.category}</div>
-            <div className="col">{item.name}</div>
-            <div className="col">{item.sets}</div>
-            <div className="col">{item.minutes}</div>
-            <div className="col">{item.weight}</div>
-            <div className="col">
-              <input
-                type="checkbox"
-                onChange={(e) => {
-                  if (e.target.checked) {
-                    handleCheckbox(item.id);
-                  }
-                }}
-              />
-            </div>
-          </div>
-        ))}
-        <div className="row detail-list-finish">
-          <div className="col result-msg">33% of the plan completed</div>
-          <div className="col">
-            <button
-              type="button"
-              className="btn btn-save"
-              onClick={sendCheckboxIdToDB}
-            >
-              Save
-            </button>
-          </div>
-          <div className="col">
-            <button type="button" className="btn btn-finish">
-              Finish Exercises
-            </button>
-          </div>
-        </div>
-      </div>
+      <UpdateDetails
+        date={date}
+        filteredList={getDetails(date)}
+        detailOpen={detailOpen}
+      />
     </>
   );
 };
