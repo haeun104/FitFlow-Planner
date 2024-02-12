@@ -4,7 +4,7 @@ import PlanLists from "../components/PlanLists";
 import { useEffect, useState } from "react";
 
 const EditPlan = ({ dbList }) => {
-  const [validCheck, setValidCheck] = useState(false);
+  const [validCheck, setValidCheck] = useState(true);
   const [multipleList, setMultipleList] = useState([]);
 
   const { date } = useParams();
@@ -26,6 +26,7 @@ const EditPlan = ({ dbList }) => {
       <PlanForm
         setValidCheck={setValidCheck}
         setMultipleList={setMultipleList}
+        date={date}
       />
       <PlanLists
         validCheck={validCheck}

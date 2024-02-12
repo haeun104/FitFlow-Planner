@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import exerciseList from "../data/exerciseList";
 
-const PlanForm = ({ setValidCheck, setMultipleList }) => {
+const PlanForm = ({ setValidCheck, setMultipleList, date }) => {
   const [exercises, setExercises] = useState([]);
   const [category, setCategory] = useState("Chest");
   const [planOpen, setPlanOpen] = useState(false);
   const [singleList, setSingleList] = useState({
-    date: "",
+    date: date,
     category: "",
     name: "",
     sets: 0,

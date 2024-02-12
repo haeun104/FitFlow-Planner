@@ -19,6 +19,7 @@ const AddPlan = () => {
       <PlanForm
         setValidCheck={setValidCheck}
         setMultipleList={setMultipleList}
+        date=""
       />
       <PlanLists
         validCheck={validCheck}
