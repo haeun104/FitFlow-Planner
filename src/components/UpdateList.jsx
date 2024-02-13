@@ -1,6 +1,7 @@
 import { useState } from "react";
 import UpdateDetails from "./UpdateDetails";
 import { useNavigate } from "react-router-dom";
+import { deleteDataDb } from "../data/firebase";
 
 const UpdateList = ({ summarizedList, dbList }) => {
   const [detailOpen, setDetailOpen] = useState(false);
@@ -12,7 +13,7 @@ const UpdateList = ({ summarizedList, dbList }) => {
   };
   // console.log(dbList);
 
-  const { date, category, name } = summarizedList;
+  const { date, category, name, id } = summarizedList;
 
   // 클릭한 일자의 상세 데이터를 가져옴
   const getDetails = (date) => {
@@ -23,6 +24,12 @@ const UpdateList = ({ summarizedList, dbList }) => {
   // Edit 페이지로 이동
   const goEditPage = (selectedDate) => {
     navigate(`/edit/${selectedDate}`);
+  };
+
+  // DB에서 데이터 삭제
+
+  const handleDeleteDb = (id) => {
+    deleteDataDb(id);
   };
 
   return (
@@ -48,7 +55,11 @@ const UpdateList = ({ summarizedList, dbList }) => {
           >
             Edit
           </button>
-          <button type="button" className="btn btn-delete">
+          <button
+            type="button"
+            className="btn btn-delete"
+            onClick={() => handleDeleteDb(id)}
+          >
             Delete
           </button>
         </div>

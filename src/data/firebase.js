@@ -11,6 +11,7 @@ import {
   query,
   where,
   deleteDoc,
+  doc,
 } from "firebase/firestore";
 
 // Your web app's Firebase configuration
@@ -68,7 +69,6 @@ export async function updateDataToDb(lists) {
   try {
     const querySnapshot = await getDocs(q);
     querySnapshot.forEach((doc) => {
-      // 문서의 ID가 삭제할 ID 목록에 포함되어 있지 않은 경우에만 출력하고 삭제
       if (!id.includes(doc.id)) {
         deleteDoc(doc.ref);
       }
@@ -76,6 +76,18 @@ export async function updateDataToDb(lists) {
     for (let item of newItems) {
       console.log(item);
       await addDoc(collection(db, "plan"), item);
+    }
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+// Firebase에 데이터 삭제
+export async function deleteDataDb(listOfId) {
+  try {
+    for (let id of listOfId) {
+      const docRef = doc(db, "plan", id);
+      await deleteDoc(docRef);
     }
   } catch (error) {
     console.error(error);
