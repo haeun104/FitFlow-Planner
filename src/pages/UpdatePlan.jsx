@@ -2,7 +2,8 @@ import UpdateList from "../components/UpdateList";
 
 const UpdatePlan = ({ dbList }) => {
   // DB의 데이터를 날짜 별 하나의 객체로 재구성하여 반환
-  const summarizedList = dbList.reduce((acc, curr) => {
+  const incompleteList = dbList.filter((item) => !item.isClosed);
+  const summarizedList = incompleteList.reduce((acc, curr) => {
     const existingDate = acc.find((item) => item.date === curr.date);
     if (existingDate) {
       existingDate.category.push(curr.category);
