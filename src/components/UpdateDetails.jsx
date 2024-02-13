@@ -35,6 +35,19 @@ const UpdateDetails = ({ date, filteredList, detailOpen }) => {
     setProgressMsg(progress);
   };
 
+  // Finish 클릭할 경우 DB에 클로징 처리
+  const handleFinishClick = async () => {
+    try {
+      for (let list of filteredList) {
+        const docRef = doc(collection(db, "plan"), list.id);
+        await updateDoc(docRef, { isClosed: true });
+        console.log("document is updated successfully");
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <div
       className="container text-center detail-list"
@@ -77,7 +90,11 @@ const UpdateDetails = ({ date, filteredList, detailOpen }) => {
           >
             Save
           </button>
-          <button type="button" className="btn btn-finish">
+          <button
+            type="button"
+            className="btn btn-finish"
+            onClick={() => handleFinishClick()}
+          >
             Finish Exercises
           </button>
         </div>
