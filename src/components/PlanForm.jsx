@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import exerciseList from "../data/exerciseList";
 
-const PlanForm = ({ setValidCheck, setMultipleList, date }) => {
+const PlanForm = ({ setValidCheck, setMultipleList, date, disabled }) => {
   const [exercises, setExercises] = useState([]);
   const [category, setCategory] = useState("Chest");
   const [planOpen, setPlanOpen] = useState(false);
@@ -110,6 +110,7 @@ const PlanForm = ({ setValidCheck, setMultipleList, date }) => {
           value={singleList.date}
           name="date"
           onChange={(e) => updateSingleList(e)}
+          disabled={disabled}
         />
       </div>
       <div className="mb-3">

@@ -1,9 +1,13 @@
 import { useNavigate } from "react-router-dom";
-import { db } from "../data/firebase";
-import { collection, addDoc } from "firebase/firestore";
 import { useEffect, useState } from "react";
 
-const PlanLists = ({ validCheck, multipleList, setMultipleList, resetData }) => {
+const PlanLists = ({
+  validCheck,
+  multipleList,
+  setMultipleList,
+  resetData,
+  handleDataToDb,
+}) => {
   const [finalList, setFinalList] = useState([]);
   const navigate = useNavigate();
 
@@ -23,19 +27,12 @@ const PlanLists = ({ validCheck, multipleList, setMultipleList, resetData }) => 
     navigate(-1);
   };
 
-  // Firebase에 목록을 추가
-  async function addDataToDb(lists) {
-    try {
-      for (let list of lists) {
-        await addDoc(collection(db, "plan"), list);
-      }
-      console.log("Lists added to DB successfully.");
-    } catch (error) {
-      console.error(error);
-    }
+  const handleSaveClick = (list) => {
+    handleDataToDb(list);
     setFinalList([]);
     resetData();
-  }
+  };
+
   return (
     <>
       {validCheck ? (
@@ -63,7 +60,7 @@ const PlanLists = ({ validCheck, multipleList, setMultipleList, resetData }) => 
             <button
               type="button"
               className="btn btn-form-save"
-              onClick={() => addDataToDb(finalList)}
+              onClick={() => handleSaveClick(finalList)}
               style={{ display: finalList.length === 0 && "none" }}
             >
               Save
