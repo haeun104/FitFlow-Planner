@@ -1,8 +1,7 @@
 import { useState } from "react";
-import { db } from "../data/firebase";
-import { collection, updateDoc, doc } from "firebase/firestore";
+import { updateIsDoneDB, updateIsClosedDB } from "../data/firebase";
 
-const UpdateDetails = ({ date, filteredList, detailOpen }) => {
+const UpdateDetails = ({ filteredList, detailOpen }) => {
   const [updatedList, setUpdatedList] = useState(filteredList);
   const [progressSaved, setProgressSaved] = useState(false);
   const [progressMsg, setProgressMsg] = useState("");
@@ -15,37 +14,23 @@ const UpdateDetails = ({ date, filteredList, detailOpen }) => {
   };
 
   // Save를 클릭할 경우 진척 %를 업데이트, DB에 데이터를 업데이트
-  const sendCheckboxIdToDB = async () => {
-    try {
-      for (let list of updatedList) {
-        const docRef = doc(collection(db, "plan"), list.id);
-        await updateDoc(docRef, { isDone: list.isDone });
-        console.log("document is updated successfully");
-      }
-    } catch (error) {
-      console.error(error);
-    }
+  const sendCheckboxIdToDB = (lists) => {
+    updateIsDoneDB(lists);
     getProgress();
   };
 
   const getProgress = () => {
     const checkedItems = updatedList.filter((item) => item.isDone);
-    const progress = (checkedItems.length / updatedList.length) * 100;
+    const progress = Math.round(
+      (checkedItems.length / updatedList.length) * 100
+    );
     setProgressSaved(true);
     setProgressMsg(progress);
   };
 
   // Finish 클릭할 경우 DB에 클로징 처리
-  const handleFinishClick = async () => {
-    try {
-      for (let list of filteredList) {
-        const docRef = doc(collection(db, "plan"), list.id);
-        await updateDoc(docRef, { isClosed: true });
-        console.log("document is updated successfully");
-      }
-    } catch (error) {
-      console.error(error);
-    }
+  const handleFinishClick = (lists) => {
+    updateIsClosedDB(lists);
   };
 
   return (
@@ -86,14 +71,14 @@ const UpdateDetails = ({ date, filteredList, detailOpen }) => {
           <button
             type="button"
             className="btn btn-save"
-            onClick={() => sendCheckboxIdToDB(date)}
+            onClick={() => sendCheckboxIdToDB(updatedList)}
           >
             Save
           </button>
           <button
             type="button"
             className="btn btn-finish"
-            onClick={() => handleFinishClick()}
+            onClick={() => handleFinishClick(filteredList)}
           >
             Finish Exercises
           </button>

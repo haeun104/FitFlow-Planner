@@ -14,14 +14,6 @@ const EditPlan = ({ dbList }) => {
     setMultipleList(dbList.filter((item) => item.date === date));
   }, []);
 
-  const resetData = () => {
-    // setPlanOpen(false);
-    // setSingleList((prev) => ({
-    //   ...prev,
-    //   date: "",
-    // }));
-  };
-
   return (
     <div className="container">
       <PlanForm
@@ -34,7 +26,6 @@ const EditPlan = ({ dbList }) => {
         validCheck={validCheck}
         multipleList={multipleList}
         setMultipleList={setMultipleList}
-        resetData={resetData}
         handleDataToDb={updateDataToDb}
       />
     </div>

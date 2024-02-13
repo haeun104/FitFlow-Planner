@@ -1,13 +1,13 @@
-const MainModal = ({ filteredData, clickedDate, click, setClick }) => {
+const MainModal = ({ modalData, clickedDate, modalOpen, setModalOpen }) => {
   const closeModal = () => {
-    setClick(false);
+    setModalOpen(false);
   };
 
   return (
     <div
       className="modal"
       tabIndex="-1"
-      style={{ display: click ? "block" : "none" }}
+      style={{ display: modalOpen ? "block" : "none" }}
     >
       <div className="modal-dialog">
         <div className="modal-content">
@@ -23,7 +23,7 @@ const MainModal = ({ filteredData, clickedDate, click, setClick }) => {
           </div>
           <div className="modal-body">
             <div className="modal-lists-wrapper">
-              {filteredData.map((item) => (
+              {modalData.map((item) => (
                 <div key={item.id} className="list">
                   <div>{item.category}</div>
                   <div>{item.name}</div>

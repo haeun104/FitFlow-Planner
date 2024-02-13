@@ -11,6 +11,7 @@ import { useEffect, useState } from "react";
 function App() {
   const [dbList, setDbList] = useState();
 
+  // firestore 실시간 데이터 동기화
   useEffect(() => {
     const unsubscribe = onSnapshot(collection(db, "plan"), (snapshot) => {
       const newData = [];

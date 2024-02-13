@@ -17,10 +17,15 @@ const PlanForm = ({ setValidCheck, setMultipleList, date, disabled }) => {
   });
   const [error, setError] = useState([]);
 
-  // DB 에 존재하는 카테고리 목록 추출 (중복 제거)
+  // 마운팅 시점에 설정된 카테고리로 필터링 실행
+  useEffect(() => {
+    setExercises(exerciseList.filter((item) => item.category === category));
+  }, []);
+
+  // exerciseList 파일에 존재하는 카테고리 목록 추출 (중복 제거)
   const categoryList = [...new Set(exerciseList.map((item) => item.category))];
 
-  // 카테고리 선택 시 DB 목록에서 필터링
+  // 카테고리 선택 시 exerciseList 목록에서 필터링
   const filterExercises = (e) => {
     const filteredEx = exerciseList.filter(
       (item) => item.category === e.target.value
@@ -28,11 +33,6 @@ const PlanForm = ({ setValidCheck, setMultipleList, date, disabled }) => {
     setCategory(e.target.value);
     setExercises(filteredEx);
   };
-
-  // 마운팅 시점에 설정된 카테고리로 필터링 실행
-  useEffect(() => {
-    setExercises(exerciseList.filter((item) => item.category === category));
-  }, []);
 
   // 필터링된 리스트에서 특정 아이템 클릭 시 하단에 계획 칸을 보여줌
   const addToList = (name, category) => {
@@ -45,7 +45,7 @@ const PlanForm = ({ setValidCheck, setMultipleList, date, disabled }) => {
     setPlanOpen(true);
   };
 
-  // 계획 칸 입력 시 state 업데이트
+  // Input 값 입력 시 state 업데이트
   const updateSingleList = (e) => {
     const { name, value } = e.target;
     setSingleList((prev) => ({
@@ -54,7 +54,7 @@ const PlanForm = ({ setValidCheck, setMultipleList, date, disabled }) => {
     }));
   };
 
-  // 계획 칸 입력 후 저장 클릭 시 Validation 체크 및 최종 계획 목록에 추가
+  // 저장 클릭 시 Validation 체크 및 SetMultipleList로 전달
   const createLists = () => {
     setError([]);
     let validation = true;
@@ -72,19 +72,17 @@ const PlanForm = ({ setValidCheck, setMultipleList, date, disabled }) => {
     }
     if (singleList.sets <= 0 && singleList.minutes <= 0) {
       validation = false;
-      setError((prev) => [
-        ...prev,
-        "One between Sets and Minutes must be more than zero.",
-      ]); // 왜 빈칸인데도 0으로 인식하는건지 확인 필요
+      setError((prev) => [...prev, "Sets or Minutes must be more than zero."]); // 왜 빈칸인데도 0으로 인식하는건지 확인 필요
     }
     if (singleList.sets === "" && singleList.minutes === "") {
       validation = false;
-      setError((prev) => [
-        ...prev,
-        "One between Sets and Minutes must be input.",
-      ]);
+      setError((prev) => [...prev, "Sets or Minutes must be input."]);
     }
-    if (singleList.sets < 0 || singleList.minutes < 0) {
+    if (
+      singleList.sets < 0 ||
+      singleList.minutes < 0 ||
+      singleList.weight < 0
+    ) {
       validation = false;
       setError((prev) => [...prev, "Value must be more than zero."]);
     }

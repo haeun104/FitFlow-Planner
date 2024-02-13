@@ -7,14 +7,6 @@ const AddPlan = () => {
   const [validCheck, setValidCheck] = useState(false);
   const [multipleList, setMultipleList] = useState([]);
 
-  const resetData = () => {
-    // setPlanOpen(false);
-    // setSingleList((prev) => ({
-    //   ...prev,
-    //   date: "",
-    // }));
-  };
-
   return (
     <div className="container">
       <PlanForm
@@ -27,7 +19,6 @@ const AddPlan = () => {
         validCheck={validCheck}
         multipleList={multipleList}
         setMultipleList={setMultipleList}
-        resetData={resetData}
         handleDataToDb={addDataToDb}
       />
     </div>

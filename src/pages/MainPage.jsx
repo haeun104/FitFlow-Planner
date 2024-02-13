@@ -3,29 +3,25 @@ import MainCalendar from "../components/MainCalendar";
 import MainModal from "../components/MainModal";
 
 const MainPage = ({ dbList }) => {
-  const [filteredData, setFilteredData] = useState([]);
+  const [modalData, setModalData] = useState([]);
   const [clickedDate, setClickedDate] = useState();
-  const [click, setClick] = useState(false);
-
-  const filterData = (date) => {
-    setFilteredData(dbList.filter((item) => item.date === date));
-  };
+  const [modalOpen, setModalOpen] = useState(false);
 
   const updateClickedDate = (clickedDate) => {
     setClickedDate(clickedDate);
-    filterData(clickedDate);
-    setClick(true);
+    setModalOpen(true);
+    setModalData(dbList.filter((item) => item.date === clickedDate));
   };
 
   return (
     <>
       <MainCalendar updateClickedDate={updateClickedDate} dbList={dbList} />
-      {filteredData.length > 0 && click ? (
+      {modalData.length > 0 && modalOpen ? (
         <MainModal
-          filteredData={filteredData}
+          modalData={modalData}
           clickedDate={clickedDate}
-          click={click}
-          setClick={setClick}
+          modalOpen={modalOpen}
+          setModalOpen={setModalOpen}
         />
       ) : null}
     </>

@@ -11,7 +11,6 @@ const UpdateList = ({ summarizedList, dbList }) => {
   const handleDetailOpen = () => {
     setDetailOpen(!detailOpen);
   };
-  // console.log(dbList);
 
   const { date, category, name, id } = summarizedList;
 
@@ -27,7 +26,6 @@ const UpdateList = ({ summarizedList, dbList }) => {
   };
 
   // DB에서 데이터 삭제
-
   const handleDeleteDb = (id) => {
     deleteDataDb(id);
   };
@@ -64,11 +62,7 @@ const UpdateList = ({ summarizedList, dbList }) => {
           </button>
         </div>
       </li>
-      <UpdateDetails
-        date={date}
-        filteredList={getDetails(date)}
-        detailOpen={detailOpen}
-      />
+      <UpdateDetails filteredList={getDetails(date)} detailOpen={detailOpen} />
     </>
   );
 };

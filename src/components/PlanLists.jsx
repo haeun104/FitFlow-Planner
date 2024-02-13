@@ -5,7 +5,6 @@ const PlanLists = ({
   validCheck,
   multipleList,
   setMultipleList,
-  resetData,
   handleDataToDb,
 }) => {
   const [finalList, setFinalList] = useState([]);
@@ -30,7 +29,8 @@ const PlanLists = ({
   const handleSaveClick = (list) => {
     handleDataToDb(list);
     setFinalList([]);
-    resetData();
+    alert("Successfully saved.");
+    navigate("/");
   };
 
   return (

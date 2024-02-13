@@ -1,8 +1,4 @@
-// Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-
 import {
   getFirestore,
   getDocs,
@@ -12,9 +8,9 @@ import {
   where,
   deleteDoc,
   doc,
+  updateDoc,
 } from "firebase/firestore";
 
-// Your web app's Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyCvdb5Ix3zp6tngjhGoCg3p7rfNePVNI_4",
   authDomain: "fitflow-planner.firebaseapp.com",
@@ -24,10 +20,8 @@ const firebaseConfig = {
   appId: "1:504609888:web:87089ed4300d8ccd1ad705",
 };
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-
 // Firebase 앱 인스턴스를 이용하여 Firestore 데이터베이스를 초기화
+const app = initializeApp(firebaseConfig);
 
 export const db = getFirestore(app);
 
@@ -44,7 +38,7 @@ export async function fetchDataFromDb() {
   }
 }
 
-// Firebase에 목록을 추가
+// Firestore에 새 목록을 추가
 export async function addDataToDb(lists) {
   try {
     for (let list of lists) {
@@ -56,7 +50,7 @@ export async function addDataToDb(lists) {
   }
 }
 
-// Firebase에 변경된 목록을 업데이트
+// Firestore에 변경된 목록을 업데이트
 export async function updateDataToDb(lists) {
   const newItems = lists.filter((item) => !("id" in item));
   console.log(newItems);
@@ -82,12 +76,38 @@ export async function updateDataToDb(lists) {
   }
 }
 
-// Firebase에 데이터 삭제
+// Firestore에 데이터 삭제
 export async function deleteDataDb(listOfId) {
   try {
     for (let id of listOfId) {
       const docRef = doc(db, "plan", id);
       await deleteDoc(docRef);
+    }
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+// Firestore 에 isDone 상태 업데이트
+export async function updateIsDoneDB(lists) {
+  try {
+    for (let list of lists) {
+      const docRef = doc(collection(db, "plan"), list.id);
+      await updateDoc(docRef, { isDone: list.isDone });
+      console.log("document is updated successfully");
+    }
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+// Firestore에 isClose 상태 업데이트
+export async function updateIsClosedDB(lists) {
+  try {
+    for (let list of lists) {
+      const docRef = doc(collection(db, "plan"), list.id);
+      await updateDoc(docRef, { isClosed: true });
+      console.log("document is updated successfully");
     }
   } catch (error) {
     console.error(error);

@@ -6,6 +6,7 @@ import "react-calendar/dist/Calendar.css";
 const MainCalendar = ({ updateClickedDate, dbList }) => {
   const [date, setDate] = useState(new Date());
 
+  // DB 데이터에서 close 여부 구분
   const completeDays = dbList.filter((item) => item.isClosed);
   const incompleteDays = dbList.filter((item) => !item.isClosed);
 
@@ -17,7 +18,6 @@ const MainCalendar = ({ updateClickedDate, dbList }) => {
   ];
 
   const clickDate = (date) => {
-    console.log(date);
     setDate(date);
     updateClickedDate(getFormattedDate(date));
   };
