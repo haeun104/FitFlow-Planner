@@ -2,9 +2,12 @@ import Calendar from "react-calendar";
 import { useState } from "react";
 import { getFormattedDate } from "../utils/utils";
 import "react-calendar/dist/Calendar.css";
+import { useNavigate } from "react-router-dom";
 
 const MainCalendar = ({ updateClickedDate, dbList }) => {
   const [date, setDate] = useState(new Date());
+
+  const navigate = useNavigate();
 
   // DB 데이터에서 close 여부 구분
   const completeDays = dbList.filter((item) => item.isClosed);
@@ -20,6 +23,12 @@ const MainCalendar = ({ updateClickedDate, dbList }) => {
   const clickDate = (date) => {
     setDate(date);
     updateClickedDate(getFormattedDate(date));
+    if (
+      !listOfIncompleteDays.includes(getFormattedDate(date)) &&
+      !listOfcompleteDays.includes(getFormattedDate(date))
+    ) {
+      navigate("/new");
+    }
   };
 
   const addClass = ({ date }) => {
@@ -34,6 +43,19 @@ const MainCalendar = ({ updateClickedDate, dbList }) => {
   return (
     <div className="main-calendar">
       <Calendar value={date} onChange={clickDate} tileContent={addClass} />
+      <div className="main-calendar-info">
+        <div className="complete-day">
+          <span className="circle"></span>
+          <p>Complete day</p>
+        </div>
+        <div className="planned-day">
+          <span className="circle"></span>
+          <p>Planned day</p>
+        </div>
+      </div>
+      <div className="completion-ratio">
+        This month's average completion ratio: <span></span>
+      </div>
     </div>
   );
 };

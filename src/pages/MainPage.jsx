@@ -14,7 +14,7 @@ const MainPage = ({ dbList }) => {
   };
 
   return (
-    <>
+    <div className="container">
       <MainCalendar updateClickedDate={updateClickedDate} dbList={dbList} />
       {modalData.length > 0 && modalOpen ? (
         <MainModal
@@ -24,7 +24,7 @@ const MainPage = ({ dbList }) => {
           setModalOpen={setModalOpen}
         />
       ) : null}
-    </>
+    </div>
   );
 };
 
