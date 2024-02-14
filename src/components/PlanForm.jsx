@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import exerciseList from "../data/exerciseList";
+import { getFormattedDate } from "../utils/utils";
 
 const PlanForm = ({ setValidCheck, setMultipleList, date, disabled }) => {
   const [exercises, setExercises] = useState([]);
@@ -133,6 +134,7 @@ const PlanForm = ({ setValidCheck, setMultipleList, date, disabled }) => {
           name="date"
           onChange={(e) => updateSingleList(e)}
           disabled={disabled}
+          min={getFormattedDate(new Date())}
         />
       </div>
       <div className="mb-3">

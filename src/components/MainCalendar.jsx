@@ -21,11 +21,12 @@ const MainCalendar = ({ updateClickedDate, dbList }) => {
   ];
 
   const clickDate = (date) => {
+    const formattedDate = getFormattedDate(date);
     setDate(date);
-    updateClickedDate(getFormattedDate(date));
+    updateClickedDate(formattedDate);
     if (
-      !listOfIncompleteDays.includes(getFormattedDate(date)) &&
-      !listOfcompleteDays.includes(getFormattedDate(date))
+      !listOfIncompleteDays.includes(formattedDate) &&
+      !listOfcompleteDays.includes(formattedDate)
     ) {
       navigate("/new");
     }
