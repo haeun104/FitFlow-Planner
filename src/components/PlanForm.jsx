@@ -16,11 +16,35 @@ const PlanForm = ({ setValidCheck, setMultipleList, date, disabled }) => {
     isClosed: false,
   });
   const [error, setError] = useState([]);
+  const [categoryOpen, setCategoryOpen] = useState(true);
+  const [searchBar, setSearchBar] = useState();
+  const [searchBarEx, setSearchBarEx] = useState([]);
 
   // 마운팅 시점에 설정된 카테고리로 필터링 실행
   useEffect(() => {
     setExercises(exerciseList.filter((item) => item.category === category));
   }, []);
+
+  // search bar 입력 시 운동 목록 업데이트
+
+  const updateSearchBar = (e) => {
+    setSearchBar(e.target.value);
+  };
+
+  const handleKeyDown = () => {
+    setCategoryOpen(false);
+  };
+
+  const handleKeyUp = () => {
+    if (!searchBar) {
+      setCategoryOpen(true);
+    }
+    setSearchBarEx(
+      exerciseList.filter((item) =>
+        item.name.toLowerCase().includes(searchBar.toLowerCase())
+      )
+    );
+  };
 
   // exerciseList 파일에 존재하는 카테고리 목록 추출 (중복 제거)
   const categoryList = [...new Set(exerciseList.map((item) => item.category))];
@@ -120,32 +144,55 @@ const PlanForm = ({ setValidCheck, setMultipleList, date, disabled }) => {
           className="form-control"
           id="search-bar"
           placeholder="Enter exercise name"
+          value={searchBar}
+          onChange={(e) => updateSearchBar(e)}
+          onKeyDown={handleKeyDown}
+          onKeyUp={handleKeyUp}
         />
       </div>
-      <div className="mb-3 btn-box">
-        {categoryList.map((item, index) => (
-          <button
-            key={index}
-            type="button"
-            className={`btn btn-plan-form ${category === item && "clicked"}`}
-            onClick={filterExercises}
-            value={item}
-          >
-            {item}
-          </button>
-        ))}
-      </div>
-      <ul>
-        {exercises.map((ex, index) => (
-          <li
-            key={index}
-            className="exercises-list"
-            onClick={() => addToList(ex.name, ex.category)}
-          >
-            {ex.name}
-          </li>
-        ))}
-      </ul>
+      {categoryOpen ? (
+        <>
+          <div className="mb-3 btn-box">
+            {categoryList.map((item, index) => (
+              <button
+                key={index}
+                type="button"
+                className={`btn btn-plan-form ${
+                  category === item && "clicked"
+                }`}
+                onClick={filterExercises}
+                value={item}
+              >
+                {item}
+              </button>
+            ))}
+          </div>
+          <ul>
+            {exercises.map((ex, index) => (
+              <li
+                key={index}
+                className="exercises-list"
+                onClick={() => addToList(ex.name, ex.category)}
+              >
+                {ex.name}
+              </li>
+            ))}
+          </ul>
+        </>
+      ) : (
+        <ul>
+          {searchBarEx.map((ex, index) => (
+            <li
+              key={index}
+              className="exercises-list"
+              onClick={() => addToList(ex.name, ex.category)}
+            >
+              {ex.name}
+            </li>
+          ))}
+        </ul>
+      )}
+
       <div className="mb-3">
         <button
           type="button"
