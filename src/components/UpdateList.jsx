@@ -1,10 +1,12 @@
 import { useState } from "react";
 import UpdateDetails from "./UpdateDetails";
 import { useNavigate } from "react-router-dom";
-import { deleteDataDb } from "../data/firebase";
+
+import PlanModal from "./PlanModal";
 
 const UpdateList = ({ summarizedList, dbList }) => {
   const [detailOpen, setDetailOpen] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
 
   const navigate = useNavigate();
 
@@ -25,9 +27,8 @@ const UpdateList = ({ summarizedList, dbList }) => {
     navigate(`/edit/${selectedDate}`);
   };
 
-  // DB에서 데이터 삭제
-  const handleDeleteDb = (id) => {
-    deleteDataDb(id);
+  const openModal = () => {
+    setModalOpen(true);
   };
 
   return (
@@ -53,16 +54,19 @@ const UpdateList = ({ summarizedList, dbList }) => {
           >
             Edit
           </button>
-          <button
-            type="button"
-            className="btn btn-delete"
-            onClick={() => handleDeleteDb(id)}
-          >
+          <button type="button" className="btn btn-delete" onClick={openModal}>
             Delete
           </button>
         </div>
       </li>
       <UpdateDetails filteredList={getDetails(date)} detailOpen={detailOpen} />
+      <PlanModal
+        modalOpen={modalOpen}
+        setModalOpen={setModalOpen}
+        type="delete"
+        message="Are you sure to delete? Deleted data will not be restored."
+        id={id}
+      />
     </>
   );
 };

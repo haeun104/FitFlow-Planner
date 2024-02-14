@@ -1,5 +1,6 @@
-import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+import PlanModal from "./PlanModal";
+import { useNavigate } from "react-router-dom";
 
 const PlanLists = ({
   validCheck,
@@ -8,6 +9,9 @@ const PlanLists = ({
   handleDataToDb,
 }) => {
   const [finalList, setFinalList] = useState([]);
+
+  const [modalOpen, setModalOpen] = useState(false);
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -29,8 +33,7 @@ const PlanLists = ({
   const handleSaveClick = (list) => {
     handleDataToDb(list);
     setFinalList([]);
-    alert("Successfully saved.");
-    navigate("/");
+    setModalOpen(true);
   };
 
   return (
@@ -85,6 +88,12 @@ const PlanLists = ({
           </button>
         </div>
       )}
+      <PlanModal
+        modalOpen={modalOpen}
+        setModalOpen={setModalOpen}
+        type="save"
+        message="Successfully saved!"
+      />
     </>
   );
 };
