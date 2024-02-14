@@ -20,6 +20,10 @@ const UpdatePlan = ({ dbList }) => {
     return acc;
   }, []);
 
+  summarizedList.sort((a, b) => {
+    return new Date(a.date) - new Date(b.date);
+  });
+
   return (
     <>
       <div className="container update-plan">

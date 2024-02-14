@@ -1,11 +1,14 @@
 .modal {
+  font-size: 12px;
   background-color: rgba(121, 121, 121, 0.5);
-  .modal-lists-wrapper {
-    .list {
-      display: flex;
-      > div {
-        flex: 1;
-      }
-    }
+  .modal-header {
+    border: none;
+  }
+  .modal-title {
+  }
+  .col {
+    line-height: 20px;
+    border-bottom: 1px solid $border-color;
+    text-align: center;
   }
 }
