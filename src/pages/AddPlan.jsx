@@ -9,6 +9,7 @@ const AddPlan = () => {
 
   return (
     <div className="container">
+      <h3>Add Plan</h3>
       <PlanForm
         setValidCheck={setValidCheck}
         setMultipleList={setMultipleList}

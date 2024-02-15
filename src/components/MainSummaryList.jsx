@@ -12,7 +12,7 @@ const MainSummaryList = () => {
   return (
     <div className="main-summary">
       <div className="main-summary-title">
-        <h3>Upcoming Fitness Plan</h3>
+        <h3>Upcoming Fitness Plans</h3>
         <button className="btn btn-summary" onClick={goToUpdate}>
           Go to details
         </button>

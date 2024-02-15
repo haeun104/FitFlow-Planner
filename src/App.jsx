@@ -56,7 +56,12 @@ function App() {
     return (
       <>
         <Header />
-        <p>Loading...</p>
+        <div className="text-center loader">
+          <div className="spinner-border" role="status">
+            <span className="sr-only"></span>
+          </div>
+          <p>Loading...</p>
+        </div>
       </>
     );
   } else {

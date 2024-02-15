@@ -12,13 +12,11 @@
     border: 1px solid $border-color;
     border-radius: 20px;
     font-size: 14px;
+    padding: 10px 20px;
     &:hover {
       background-color: $accent-color;
       color: white;
     }
-  }
-  h3 {
-    font-weight: 600;
   }
 }
 .summary-list {

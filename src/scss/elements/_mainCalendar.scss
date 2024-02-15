@@ -1,11 +1,13 @@
-@mixin circleStyle($color) {
-  width: 20px;
-  height: 20px;
+@mixin calendarCircle($color) {
+  background-color: $color;
+  width: 30px;
+  height: 30px;
   border-radius: 50%;
   position: absolute;
-  top: 0;
-  left: 0;
-  background-color: $color;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 0;
 }
 
 .main-calendar {
@@ -16,6 +18,7 @@
 }
 
 .react-calendar {
+  border: 1px solid $border-color;
   border-radius: 10px;
 }
 .react-calendar__tile.react-calendar__month-view__days__day {
@@ -54,26 +57,10 @@
 }
 
 .completeDay {
-  background-color: #c7c8cc;
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 0;
+  @include calendarCircle(#c7c8cc);
 }
 .incompleteDay {
-  background-color: #f6d6d6;
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 0;
+  @include calendarCircle(#f6d6d6);
 }
 .main-calendar-info {
   display: flex;
@@ -95,6 +82,7 @@
   }
 }
 
+.main-calendar-info p,
 .completion-ratio {
-  font-size: 14px;
+  font-size: 12px;
 }

@@ -8,7 +8,7 @@ const UpdatePlan = () => {
   return (
     <>
       <div className="container update-plan">
-        <h2 className="update-plan-title">Plan Lists</h2>
+        <h3>Plan Lists</h3>
         <ul className="list-group">
           {summarizedList.map((item, index) => (
             <UpdateList key={index} summary={item} />
