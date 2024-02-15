@@ -1,10 +1,12 @@
 import { useParams } from "react-router-dom";
 import PlanForm from "../components/PlanForm";
 import PlanLists from "../components/PlanLists";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { updateDataToDb } from "../data/firebase";
+import { DataContext } from "../App";
 
-const EditPlan = ({ dbList }) => {
+const EditPlan = () => {
+  const { dbList } = useContext(DataContext);
   const [validCheck, setValidCheck] = useState(true);
   const [multipleList, setMultipleList] = useState([]);
 

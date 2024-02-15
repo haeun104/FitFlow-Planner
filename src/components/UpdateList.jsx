@@ -1,10 +1,13 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import UpdateDetails from "./UpdateDetails";
 import { useNavigate } from "react-router-dom";
 
 import PlanModal from "./PlanModal";
+import { DataContext } from "../App";
 
-const UpdateList = ({ summarizedList, dbList }) => {
+const UpdateList = ({ summarizedList }) => {
+  const { dbList } = useContext(DataContext);
+
   const [detailOpen, setDetailOpen] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
 

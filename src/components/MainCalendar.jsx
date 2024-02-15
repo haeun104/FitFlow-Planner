@@ -1,10 +1,12 @@
 import Calendar from "react-calendar";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { getFormattedDate } from "../utils/utils";
 import "react-calendar/dist/Calendar.css";
 import { useNavigate } from "react-router-dom";
+import { DataContext } from "../App";
 
-const MainCalendar = ({ updateClickedDate, dbList }) => {
+const MainCalendar = ({ updateClickedDate }) => {
+  const { dbList } = useContext(DataContext);
   const [date, setDate] = useState(new Date());
 
   const navigate = useNavigate();

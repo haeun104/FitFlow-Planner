@@ -1,6 +1,10 @@
+import { useContext } from "react";
 import UpdateList from "../components/UpdateList";
+import { DataContext } from "../App";
 
-const UpdatePlan = ({ dbList }) => {
+const UpdatePlan = () => {
+  const { dbList } = useContext(DataContext);
+
   // DB의 데이터를 날짜 별 하나의 객체로 재구성하여 반환
   const incompleteList = dbList.filter((item) => !item.isClosed);
   const summarizedList = incompleteList.reduce((acc, curr) => {
@@ -30,7 +34,7 @@ const UpdatePlan = ({ dbList }) => {
         <h2 className="update-plan-title">Plan Lists</h2>
         <ul className="list-group">
           {summarizedList.map((item, index) => (
-            <UpdateList key={index} summarizedList={item} dbList={dbList} />
+            <UpdateList key={index} summarizedList={item} />
           ))}
         </ul>
       </div>

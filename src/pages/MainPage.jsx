@@ -1,9 +1,12 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import MainCalendar from "../components/MainCalendar";
 import MainModal from "../components/MainModal";
 import MainSummaryList from "../components/MainSummaryList";
+import { DataContext } from "../App";
 
-const MainPage = ({ dbList }) => {
+const MainPage = () => {
+  const { dbList } = useContext(DataContext);
+
   const [modalData, setModalData] = useState([]);
   const [clickedDate, setClickedDate] = useState();
   const [modalOpen, setModalOpen] = useState(false);
@@ -35,7 +38,7 @@ const MainPage = ({ dbList }) => {
 
   summarizedList.sort((a, b) => {
     return new Date(a.date) - new Date(b.date);
-  })
+  });
 
   return (
     <div className="container">
@@ -48,7 +51,7 @@ const MainPage = ({ dbList }) => {
           setModalOpen={setModalOpen}
         />
       ) : null}
-      <MainSummaryList summarizedList={summarizedList}/>
+      <MainSummaryList summarizedList={summarizedList} />
     </div>
   );
 };
