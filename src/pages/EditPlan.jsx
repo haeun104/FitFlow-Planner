@@ -29,6 +29,7 @@ const EditPlan = () => {
         multipleList={multipleList}
         setMultipleList={setMultipleList}
         handleDataToDb={updateDataToDb}
+        type="edit"
       />
     </div>
   );

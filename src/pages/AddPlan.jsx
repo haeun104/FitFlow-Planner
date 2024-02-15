@@ -20,6 +20,7 @@ const AddPlan = () => {
         multipleList={multipleList}
         setMultipleList={setMultipleList}
         handleDataToDb={addDataToDb}
+        type="new"
       />
     </div>
   );

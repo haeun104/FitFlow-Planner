@@ -1,21 +1,26 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import PlanModal from "./PlanModal";
 import { useNavigate } from "react-router-dom";
+import { DataContext } from "../App";
 
 const PlanLists = ({
   validCheck,
   multipleList,
   setMultipleList,
   handleDataToDb,
+  type,
 }) => {
   const [finalList, setFinalList] = useState([]);
-
   const [modalOpen, setModalOpen] = useState(false);
+  const [error, setError] = useState("");
 
   const navigate = useNavigate();
 
+  const { dbList } = useContext(DataContext);
+
   useEffect(() => {
     setFinalList(multipleList);
+    setError("");
   }, [multipleList]);
 
   //  삭제 버튼 클릭 시 목록에서 삭제
@@ -30,10 +35,26 @@ const PlanLists = ({
     navigate(-1);
   };
 
+  const checkExistingDate = (list) => {
+    const date = [...new Set(list.map((item) => item.date))].join();
+    const existingDate = dbList.filter((item) => item.date === date).length;
+    return existingDate > 0 ? true : false;
+  };
+
   const handleSaveClick = (list) => {
-    handleDataToDb(list);
-    setFinalList([]);
-    setModalOpen(true);
+    if (type === "new") {
+      if (checkExistingDate(list)) {
+        setError("Plan already exists on this day.");
+      } else {
+        handleDataToDb(list);
+        setFinalList([]);
+        setModalOpen(true);
+      }
+    } else {
+      handleDataToDb(list);
+      setFinalList([]);
+      setModalOpen(true);
+    }
   };
 
   return (
@@ -76,6 +97,7 @@ const PlanLists = ({
               Cancel
             </button>
           </div>
+          <div className="error-message">{error}</div>
         </div>
       ) : (
         <div className="mb-3 btn-form-box">
