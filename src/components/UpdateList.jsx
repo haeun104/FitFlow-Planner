@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import PlanModal from "./PlanModal";
 import { DataContext } from "../App";
 
-const UpdateList = ({ summarizedList }) => {
+const UpdateList = ({ summary }) => {
   const { dbList } = useContext(DataContext);
 
   const [detailOpen, setDetailOpen] = useState(false);
@@ -17,7 +17,7 @@ const UpdateList = ({ summarizedList }) => {
     setDetailOpen(!detailOpen);
   };
 
-  const { date, category, name, id } = summarizedList;
+  const { date, category, name, id } = summary;
 
   // 클릭한 일자의 상세 데이터를 가져옴
   const getDetails = (date) => {

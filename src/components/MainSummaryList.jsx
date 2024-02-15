@@ -1,6 +1,9 @@
+import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { DataContext } from "../App";
 
-const MainSummaryList = ({ summarizedList }) => {
+const MainSummaryList = () => {
+  const { summarizedList } = useContext(DataContext);
   const navigate = useNavigate();
   const goToUpdate = () => {
     navigate("/update");

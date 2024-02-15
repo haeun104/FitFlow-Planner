@@ -12,6 +12,7 @@ export const DataContext = React.createContext();
 
 function App() {
   const [dbList, setDbList] = useState();
+  const [summarizedList, setSummarizedList] = useState([]);
 
   // firestore 실시간 데이터 동기화
   useEffect(() => {
@@ -25,6 +26,32 @@ function App() {
     return () => unsubscribe();
   }, []);
 
+  useEffect(() => {
+    if (dbList) {
+      const incompleteList = dbList.filter((item) => !item.isClosed);
+      const summaryList = incompleteList.reduce((acc, curr) => {
+        const existingDate = acc.find((item) => item.date === curr.date);
+        if (existingDate) {
+          existingDate.category.push(curr.category);
+          existingDate.name.push(curr.name);
+          existingDate.id.push(curr.id);
+        } else {
+          acc.push({
+            date: curr.date,
+            category: [curr.category],
+            name: [curr.name],
+            id: [curr.id],
+          });
+        }
+        return acc;
+      }, []);
+      summaryList.sort((a, b) => {
+        return new Date(a.date) - new Date(b.date);
+      });
+      setSummarizedList(summaryList);
+    }
+  }, [dbList]);
+
   if (!dbList) {
     return (
       <>
@@ -37,7 +64,7 @@ function App() {
       <BrowserRouter>
         <Header />
         <Outlet />
-        <DataContext.Provider value={{ dbList }}>
+        <DataContext.Provider value={{ dbList, summarizedList }}>
           <Routes>
             <Route path="/" element={<MainPage />} />
             <Route path="/new" element={<AddPlan />} />
