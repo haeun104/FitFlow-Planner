@@ -12,7 +12,7 @@ import {
 } from "firebase/firestore";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCvdb5Ix3zp6tngjhGoCg3p7rfNePVNI_4",
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
   authDomain: "fitflow-planner.firebaseapp.com",
   projectId: "fitflow-planner",
   storageBucket: "fitflow-planner.appspot.com",
