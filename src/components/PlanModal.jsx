@@ -6,7 +6,6 @@ const PlanModal = ({ message, modalOpen, setModalOpen, type, id }) => {
 
   const closeModal = () => {
     setModalOpen(false);
-    navigate("/");
   };
 
   const goBack = () => {
@@ -16,6 +15,8 @@ const PlanModal = ({ message, modalOpen, setModalOpen, type, id }) => {
   // DB에서 데이터 삭제
   const handleDeleteDb = (id) => {
     deleteDataDb(id);
+    setModalOpen(false);
+    navigate("/update");
   };
 
   return (

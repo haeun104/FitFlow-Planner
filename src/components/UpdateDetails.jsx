@@ -50,7 +50,7 @@ const UpdateDetails = ({ filteredList, detailOpen }) => {
           <div className="col">Weight(kg)</div>
           <div className="col">Completion</div>
         </div>
-        {filteredList.map((item) => (
+        {updatedList.map((item) => (
           <div key={item.id} className="row">
             <div className="col">{item.category}</div>
             <div className="col">{item.name}</div>
@@ -60,6 +60,7 @@ const UpdateDetails = ({ filteredList, detailOpen }) => {
             <div className="col">
               <input
                 type="checkbox"
+                checked={item.isDone}
                 onChange={(e) => {
                   handleCheckbox(item.id, e.target.checked);
                 }}
