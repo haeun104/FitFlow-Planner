@@ -81,11 +81,18 @@ const PlanForm = ({ setValidCheck, setMultipleList, date, disabled }) => {
 
   // 저장 클릭 시 Validation 체크 및 SetMultipleList로 전달
   const createLists = () => {
+    const todayTimeStamp = new Date().getTime();
+    const planDateTimeStamp = new Date(singleList.date).getTime();
+
     setError([]);
     let validation = true;
     if (!singleList.date) {
       validation = false;
       setError((prev) => [...prev, "Select date!"]);
+    }
+    if (planDateTimeStamp < todayTimeStamp) {
+      validation = false;
+      setError((prev) => [...prev, "You can't select past date."]);
     }
     if (singleList.category === "") {
       validation = false;
