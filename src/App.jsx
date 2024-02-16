@@ -72,7 +72,8 @@ function App() {
         <DataContext.Provider value={{ dbList, summarizedList }}>
           <Routes>
             <Route path="/" element={<MainPage />} />
-            <Route path="/new" element={<AddPlan />} />
+            <Route path="/new/" element={<AddPlan />} />
+            <Route path="/new/:date" element={<AddPlan />} />
             <Route path="/update" element={<UpdatePlan />} />
             <Route path="/edit/:date" element={<EditPlan />} />
           </Routes>

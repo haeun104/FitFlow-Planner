@@ -30,7 +30,7 @@ const MainCalendar = ({ updateClickedDate }) => {
       !listOfIncompleteDays.includes(formattedDate) &&
       !listOfcompleteDays.includes(formattedDate)
     ) {
-      navigate("/new");
+      navigate(`/new/${formattedDate}`);
     }
   };
 
