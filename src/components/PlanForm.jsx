@@ -73,6 +73,13 @@ const PlanForm = ({ setValidCheck, setMultipleList, date, disabled }) => {
   // Input 값 입력 시 state 업데이트
   const updateSingleList = (e) => {
     const { name, value } = e.target;
+    if (name === "date") {
+      setMultipleList([]);
+      setSingleList((prev) => ({
+        ...prev,
+        [name]: value,
+      }));
+    }
     setSingleList((prev) => ({
       ...prev,
       [name]: value,
