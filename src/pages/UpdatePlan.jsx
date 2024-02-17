@@ -7,8 +7,10 @@ const UpdatePlan = () => {
 
   return (
     <>
-      <div className="container update-plan">
-        <h3>Plan Lists</h3>
+      <div className="container">
+        <h3>
+          <i className="fa-solid fa-pen-to-square"></i> Update Plan
+        </h3>
         <ul className="list-group">
           {summarizedList.map((item, index) => (
             <UpdateList key={index} summary={item} />

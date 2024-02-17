@@ -39,7 +39,7 @@ const UpdateDetails = ({ filteredList, detailOpen }) => {
   return (
     <>
       <div
-        className="container text-center detail-list"
+        className="text-center detail-list"
         style={{ display: detailOpen ? "block" : "none" }}
       >
         <div className="row">
@@ -72,10 +72,10 @@ const UpdateDetails = ({ filteredList, detailOpen }) => {
           <div className="col result-msg">
             {progressSaved && `${progressMsg}% of the plan completed`}
           </div>
-          <div className="col">
+          <div className="col detail-list-btns">
             <button
               type="button"
-              className="btn btn-save"
+              className="btn btn-update"
               onClick={() => sendCheckboxIdToDB(updatedList)}
             >
               Save

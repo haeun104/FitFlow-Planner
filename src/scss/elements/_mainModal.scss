@@ -5,10 +5,17 @@
     border: none;
   }
   .modal-title {
+    font-weight: 600;
   }
   .col {
     line-height: 20px;
     border-bottom: 1px solid $border-color;
     text-align: center;
+  }
+}
+
+@media screen and (max-width: $xs-size) {
+  .modal {
+    font-size: 10px;
   }
 }

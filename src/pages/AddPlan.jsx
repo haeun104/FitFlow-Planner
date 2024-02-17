@@ -12,7 +12,9 @@ const AddPlan = () => {
 
   return (
     <div className="container">
-      <h3>Add Plan</h3>
+      <h3>
+        <i className="fa-regular fa-calendar-plus"></i> Add Plan
+      </h3>
       <PlanForm
         setValidCheck={setValidCheck}
         setMultipleList={setMultipleList}

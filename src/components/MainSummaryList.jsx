@@ -25,13 +25,15 @@ const MainSummaryList = () => {
           Go to details
         </button>
       </div>
-      {nextWeekList.map((item, index) => (
-        <ul key={index} className="summary-list">
-          <li className="summary-list-date">{item.date}</li>
-          <li className="summary-list-category">{item.category.join(" | ")}</li>
-          <li className="summary-list-ex">{item.name.length} exercises</li>
-        </ul>
-      ))}
+      <ul className="list-group">
+        {nextWeekList.map((item, index) => (
+          <li key={index} className="list-group-item summary-list">
+            <div>{item.date}</div>
+            <div>{item.category.join(" | ")}</div>
+            <div>{item.name.length} exercises</div>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 };

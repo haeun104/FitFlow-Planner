@@ -296,7 +296,7 @@ const PlanForm = ({ setValidCheck, setMultipleList, date, disabled }) => {
           <div className="mb-3 exercise-save">
             <button
               type="button"
-              className="btn btn-add-exercise"
+              className="btn btn-save"
               onClick={createLists}
             >
               save

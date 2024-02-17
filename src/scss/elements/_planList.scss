@@ -16,14 +16,17 @@
 
 .btn-form-box {
   margin: 20px 0;
-  .btn-form-save {
-    background-color: $accent-color;
-    color: #fff;
+  .btn-save {
     padding: 10px 30px;
     margin-right: 20px;
   }
-  .btn-form-cancel {
-    border: 1px solid $border-color;
-    padding: 10px 30px;
+  .btn-cancel {
+    padding: 10px 20px;
+  }
+}
+
+@media screen and (max-width: $xs-size) {
+  .row-cols-5 {
+    font-size: 12px;
   }
 }

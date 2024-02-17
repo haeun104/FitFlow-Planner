@@ -23,7 +23,7 @@ const MainModal = ({ modalData, clickedDate, modalOpen, setModalOpen }) => {
           <div className="modal-header">
             <h5 className="modal-title">
               {" "}
-              {`${clickedDate} ${
+              {`${clickedDate} | ${
                 completionStatus === "true"
                   ? `Completed ${completionRatio}%`
                   : "Planned"

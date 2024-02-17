@@ -1,0 +1,28 @@
+.detail-list {
+  margin-bottom: 10px;
+  background-color: white;
+  border: 1px solid $border-color;
+  padding: 10px 0;
+  .col {
+    margin: 5px;
+  }
+  .detail-list-btns {
+    text-align: end;
+  }
+  .result-msg {
+    text-align: center;
+    line-height: 30px;
+  }
+}
+
+@media screen and (max-width: $md-size) {
+  .detail-list {
+    font-size: 14px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .detail-list {
+    font-size: 12px;
+  }
+}

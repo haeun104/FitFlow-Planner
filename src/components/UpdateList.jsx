@@ -36,13 +36,13 @@ const UpdateList = ({ summary }) => {
 
   return (
     <>
-      <li className="list-group-item summary-list">
-        <div className="summary-list-info" onClick={() => handleDetailOpen()}>
+      <li className="list-group-item update-list">
+        <div className="update-list-info" onClick={() => handleDetailOpen()}>
           <div>{date}</div>
-          <div className="summary-list-category">{category.join(" | ")}</div>
+          <div className="update-list-category">{category.join(" | ")}</div>
           <div>{name.length} exercises</div>
         </div>
-        <div className="summary-list-btns">
+        <div className="update-list-btns">
           <button
             type="button"
             className="btn btn-update"

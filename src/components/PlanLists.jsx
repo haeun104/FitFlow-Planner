@@ -83,17 +83,13 @@ const PlanLists = ({
           <div className="mb-3 btn-form-box">
             <button
               type="button"
-              className="btn btn-form-save"
+              className="btn btn-save"
               onClick={() => handleSaveClick(finalList)}
               style={{ display: finalList.length === 0 && "none" }}
             >
               Save
             </button>
-            <button
-              type="button"
-              className="btn btn-form-cancel"
-              onClick={goBack}
-            >
+            <button type="button" className="btn btn-cancel" onClick={goBack}>
               Cancel
             </button>
           </div>
@@ -101,11 +97,7 @@ const PlanLists = ({
         </div>
       ) : (
         <div className="mb-3 btn-form-box">
-          <button
-            type="button"
-            className="btn btn-form-cancel"
-            onClick={goBack}
-          >
+          <button type="button" className="btn btn-cancel" onClick={goBack}>
             Cancel
           </button>
         </div>
