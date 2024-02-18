@@ -42,37 +42,55 @@ const UpdateDetails = ({ filteredList, detailOpen }) => {
         className="text-center detail-list"
         style={{ display: detailOpen ? "block" : "none" }}
       >
-        <div className="row">
-          <div className="col">Category</div>
-          <div className="col">Name</div>
-          <div className="col">Sets</div>
-          <div className="col">Minutes</div>
-          <div className="col">Weight(kg)</div>
-          <div className="col">Completion</div>
-        </div>
-        {updatedList.map((item) => (
-          <div key={item.id} className="row">
-            <div className="col">{item.category}</div>
-            <div className="col">{item.name}</div>
-            <div className="col">{item.sets}</div>
-            <div className="col">{item.minutes}</div>
-            <div className="col">{item.weight}</div>
-            <div className="col">
-              <input
-                type="checkbox"
-                checked={item.isDone}
-                onChange={(e) => {
-                  handleCheckbox(item.id, e.target.checked);
-                }}
-              />
-            </div>
+        <div className="detail-list-plan">
+          <div className="row-head">
+            <div className="column">Category</div>
+            <div className="column">Name</div>
+            <div className="column">Sets</div>
+            <div className="column">Minutes</div>
+            <div className="column">Weight(kg)</div>
+            <div className="column">Completion</div>
           </div>
-        ))}
-        <div className="row detail-list-finish">
-          <div className="col result-msg">
+          {updatedList.map((item) => (
+            <div key={item.id} className="row-body">
+              <div className="column small-screen-col">
+                <div className="small-screen-head">Category</div>
+                <div>{item.category}</div>
+              </div>
+              <div className="column small-screen-col">
+                <div className="small-screen-head">Name</div>
+                <div>{item.name}</div>
+              </div>
+              <div className="column small-screen-col">
+                <div className="small-screen-head">Sets</div>
+                <div> {item.sets}</div>
+              </div>
+              <div className="column small-screen-col">
+                <div className="small-screen-head">Minutes</div>
+                <div>{item.minutes}</div>
+              </div>
+              <div className="column small-screen-col">
+                <div className="small-screen-head">Weight(kg)</div>
+                <div>{item.weight}</div>
+              </div>
+              <div className="column small-screen-col">
+                <div className="small-screen-head">Completion</div>
+                <input
+                  type="checkbox"
+                  checked={item.isDone}
+                  onChange={(e) => {
+                    handleCheckbox(item.id, e.target.checked);
+                  }}
+                />
+              </div>
+            </div>
+          ))}
+        </div>
+        <div className="detail-list-finish">
+          <div className="result-msg">
             {progressSaved && `${progressMsg}% of the plan completed`}
           </div>
-          <div className="col detail-list-btns">
+          <div className="detail-list-btns">
             <button
               type="button"
               className="btn btn-update"

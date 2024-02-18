@@ -6,12 +6,34 @@
   .col {
     margin: 5px;
   }
-  .detail-list-btns {
-    text-align: end;
+}
+.detail-list-finish {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+}
+
+.detail-list-btns {
+  text-align: end;
+}
+.result-msg {
+  text-align: center;
+  line-height: 30px;
+  flex: 2;
+}
+.small-screen-head {
+  display: none;
+}
+
+.row-head,
+.row-body {
+  display: flex;
+  > div {
+    flex: 1;
   }
-  .result-msg {
-    text-align: center;
-    line-height: 30px;
+  .column {
+    margin: 5px 0;
   }
 }
 
@@ -23,6 +45,39 @@
 
 @media screen and (max-width: 600px) {
   .detail-list {
-    font-size: 12px;
+    background-color: $main-bg-color;
+  }
+  .detail-list-plan {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+  .row-head {
+    display: none;
+  }
+  .row-body {
+    width: 70%;
+    flex-direction: column;
+    gap: 5px;
+    margin-left: 5px;
+    border: 1px solid $border-color;
+    border-radius: 10px;
+    padding: 10px 0;
+    background-color: white;
+  }
+  .small-screen-col {
+    width: 100%;
+    display: flex;
+    > div,
+    input {
+      width: 50%;
+    }
+  }
+  .small-screen-head {
+    display: block;
+  }
+  .detail-list-finish {
+    flex-direction: column;
   }
 }
