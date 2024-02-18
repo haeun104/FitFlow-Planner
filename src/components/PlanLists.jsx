@@ -61,7 +61,9 @@ const PlanLists = ({
     <>
       {validCheck ? (
         <div className="added-exercises">
-          <h3 className="added-exercises-title">Added Exercises</h3>
+          <h3 className="added-exercises-title">
+            <i className="fa-solid fa-list-ul"></i> Added Exercises
+          </h3>
           <div className="row row-cols-5">
             <div className="col">Name</div>
             <div className="col">Sets</div>
@@ -75,7 +77,10 @@ const PlanLists = ({
               <div className="col">{list.sets}</div>
               <div className="col">{list.minutes}</div>
               <div className="col">{list.weight}</div>
-              <div className="col btn-delete" onClick={() => deleteList(index)}>
+              <div
+                className="col btn-delete-trash"
+                onClick={() => deleteList(index)}
+              >
                 <i className="fa-solid fa-trash-can"></i>
               </div>
             </div>

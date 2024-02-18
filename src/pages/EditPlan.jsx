@@ -18,6 +18,9 @@ const EditPlan = () => {
 
   return (
     <div className="container">
+      <h3>
+        <i className="fa-solid fa-pen"></i> Edit Plan
+      </h3>
       <PlanForm
         setValidCheck={setValidCheck}
         setMultipleList={setMultipleList}

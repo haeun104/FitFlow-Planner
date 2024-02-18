@@ -32,3 +32,30 @@
     color: white;
   }
 }
+
+.btn-ok {
+  background-color: $button-color;
+  color: white;
+  &:hover {
+    background-color: #40a2e3;
+    color: white;
+  }
+}
+
+.btn-close-modal {
+  background-color: $button-color;
+  color: white;
+  &:hover {
+    background-color: rgba($color: $button-color, $alpha: 0.8);
+    color: white;
+  }
+}
+
+.btn-delete-modal {
+  background-color: #40a2e3;
+  color: white;
+  &:hover {
+    background-color: rgba($color: #40a2e3, $alpha: 0.8);
+    color: white;
+  }
+}

@@ -35,18 +35,18 @@ const PlanModal = ({ message, modalOpen, setModalOpen, type, id }) => {
               <>
                 <button
                   type="button"
-                  className="btn btn-secondary"
+                  className="btn btn-ok"
                   data-bs-dismiss="modal"
                   onClick={closeModal}
                 >
-                  Ok
+                  OK
                 </button>
               </>
             ) : (
               <>
                 <button
                   type="button"
-                  className="btn btn-secondary"
+                  className="btn btn-close-modal"
                   data-bs-dismiss="modal"
                   onClick={goBack}
                 >
@@ -54,7 +54,7 @@ const PlanModal = ({ message, modalOpen, setModalOpen, type, id }) => {
                 </button>
                 <button
                   type="button"
-                  className="btn btn-primary"
+                  className="btn btn-delete-modal"
                   onClick={() => handleDeleteDb(id)}
                 >
                   Delete

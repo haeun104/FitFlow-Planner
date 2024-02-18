@@ -10,6 +10,10 @@
   cursor: pointer;
 }
 
+.update-list-btns {
+  display: flex;
+}
+
 @media screen and (max-width: $md-size) {
   .update-list-info {
     flex-direction: column;
@@ -19,7 +23,6 @@
 
 @media screen and (max-width: $sm-size) {
   .update-list-btns {
-    display: flex;
     flex-direction: column;
     gap: 10px;
   }
