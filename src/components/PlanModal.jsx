@@ -6,6 +6,10 @@ const PlanModal = ({ message, modalOpen, setModalOpen, type, id }) => {
 
   const closeModal = () => {
     setModalOpen(false);
+    if(type === "finish" || type === "delete") {
+      navigate("/update");
+    }
+    navigate("/");
   };
 
   const goBack = () => {

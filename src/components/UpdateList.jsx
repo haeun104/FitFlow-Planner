@@ -39,7 +39,9 @@ const UpdateList = ({ summary }) => {
       <li className="list-group-item update-list">
         <div className="update-list-info" onClick={() => handleDetailOpen()}>
           <div>{date}</div>
-          <div className="update-list-category">{category.join(" | ")}</div>
+          <div className="update-list-category">
+            {Array.from(new Set(category)).join(" | ")}
+          </div>
           <div>{name.length} exercises</div>
         </div>
         <div className="update-list-btns">

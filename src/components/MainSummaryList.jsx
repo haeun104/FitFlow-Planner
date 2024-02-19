@@ -32,7 +32,7 @@ const MainSummaryList = () => {
           nextWeekList.map((item, index) => (
             <li key={index} className="list-group-item summary-list">
               <div>{item.date}</div>
-              <div>{item.category.join(" | ")}</div>
+              <div>{Array.from(new Set(item.category)).join(" | ")}</div>
               <div>{item.name.length} exercises</div>
             </li>
           ))
