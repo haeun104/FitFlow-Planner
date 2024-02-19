@@ -1,5 +1,5 @@
 import Calendar from "react-calendar";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { getFormattedDate } from "../utils/utils";
 import "react-calendar/dist/Calendar.css";
 import { useNavigate } from "react-router-dom";
@@ -8,6 +8,8 @@ import { DataContext } from "../App";
 const MainCalendar = ({ updateClickedDate }) => {
   const { dbList } = useContext(DataContext);
   const [date, setDate] = useState(new Date());
+  const [currentMonth, setCurrenMonth] = useState(getFormattedDate(new Date()));
+  const [completionRatio, setCompletionRatio] = useState(0);
 
   const navigate = useNavigate();
 
@@ -22,6 +24,20 @@ const MainCalendar = ({ updateClickedDate }) => {
     ...new Set(incompleteDays.map((item) => item.date)),
   ];
 
+  // currentMonth가 바뀔때 마다 해당 월의 ratio 업데이트
+  useEffect(() => {
+    const currentMonthData = dbList.filter(
+      (item) =>
+        item.isClosed &&
+        item.date.substring(0, 7) === currentMonth.substring(0, 7)
+    );
+    const completePlans = currentMonthData.filter((item) => item.isDone);
+    setCompletionRatio(
+      Math.round((completePlans.length / currentMonthData.length) * 100)
+    );
+  }, [currentMonth]);
+
+  // 특정 날짜 선택 시 해당 날짜를 메인 페이지로 전달, DB에 없을 시 생성 페이지로 이동
   const clickDate = (date) => {
     const formattedDate = getFormattedDate(date);
     setDate(date);
@@ -34,6 +50,7 @@ const MainCalendar = ({ updateClickedDate }) => {
     }
   };
 
+  // 계획 달성 여부에 따라 클래스 생성
   const addClass = ({ date }) => {
     if (listOfcompleteDays.includes(getFormattedDate(date))) {
       return <div className="completeDay"></div>;
@@ -43,9 +60,19 @@ const MainCalendar = ({ updateClickedDate }) => {
     }
   };
 
+  //월 이동 시 currentMonth 업데이트
+  const updateCurrentMonth = ({ activeStartDate }) => {
+    setCurrenMonth(getFormattedDate(activeStartDate));
+  };
+
   return (
     <div className="main-calendar">
-      <Calendar value={date} onChange={clickDate} tileContent={addClass} />
+      <Calendar
+        value={date}
+        onChange={clickDate}
+        tileContent={addClass}
+        onActiveStartDateChange={updateCurrentMonth}
+      />
       <div className="main-calendar-info">
         <div className="complete-day">
           <span className="circle"></span>
@@ -57,7 +84,8 @@ const MainCalendar = ({ updateClickedDate }) => {
         </div>
       </div>
       <div className="completion-ratio">
-        This month's average completion ratio: <span></span>
+        This month's average completion ratio:{" "}
+        <span>{completionRatio || 0} %</span>
       </div>
     </div>
   );
