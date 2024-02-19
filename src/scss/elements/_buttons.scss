@@ -19,6 +19,15 @@
   }
 }
 
+.btn-reset {
+  background-color: $button-color;
+  color: white;
+  &:hover {
+    background-color: rgba($color: $button-color, $alpha: 0.8);
+    color: white;
+  }
+}
+
 .btn-update,
 .btn-edit,
 .btn-delete,

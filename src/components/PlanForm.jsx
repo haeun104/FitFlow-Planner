@@ -62,7 +62,14 @@ const PlanForm = ({ setValidCheck, setMultipleList, date, disabled }) => {
   // 필터링된 리스트에서 특정 아이템 클릭 시 하단에 계획 칸을 보여줌
   const addToList = (name, category) => {
     setPlanOpen(true);
-    setSingleList((prev) => ({ ...prev, name: name, category: category }));
+    setSingleList((prev) => ({
+      ...prev,
+      name: name,
+      category: category,
+      sets: 0,
+      minutes: 0,
+      weight: 0,
+    }));
   };
 
   // Add Exercises 클릭 시 하단에 계획 칸을 보여줌
@@ -88,8 +95,8 @@ const PlanForm = ({ setValidCheck, setMultipleList, date, disabled }) => {
 
   // 저장 클릭 시 Validation 체크 및 SetMultipleList로 전달
   const createLists = () => {
-    const todayTimeStamp = new Date().getTime();
-    const planDateTimeStamp = new Date(singleList.date).getTime();
+    const today = new Date(getFormattedDate(new Date()));
+    const planDate = new Date(singleList.date);
 
     setError([]);
     let validation = true;
@@ -97,7 +104,7 @@ const PlanForm = ({ setValidCheck, setMultipleList, date, disabled }) => {
       validation = false;
       setError((prev) => [...prev, "Select date!"]);
     }
-    if (planDateTimeStamp < todayTimeStamp) {
+    if (planDate < today) {
       validation = false;
       setError((prev) => [...prev, "You can't select past date."]);
     }
@@ -111,7 +118,7 @@ const PlanForm = ({ setValidCheck, setMultipleList, date, disabled }) => {
     }
     if (singleList.sets <= 0 && singleList.minutes <= 0) {
       validation = false;
-      setError((prev) => [...prev, "Sets or Minutes must be more than zero."]); // 왜 빈칸인데도 0으로 인식하는건지 확인 필요
+      setError((prev) => [...prev, "Sets or Minutes must be more than zero."]);
     }
     if (singleList.sets === "" && singleList.minutes === "") {
       validation = false;
@@ -132,6 +139,18 @@ const PlanForm = ({ setValidCheck, setMultipleList, date, disabled }) => {
       setValidCheck(validation);
       setMultipleList((prev) => [...prev, singleList]);
     }
+  };
+
+  // reset 클릭 시 input 값 clear
+  const clearValues = () => {
+    setSingleList((prev) => ({
+      ...prev,
+      name: "",
+      category: "",
+      sets: 0,
+      minutes: 0,
+      weight: 0,
+    }));
   };
 
   return (
@@ -300,6 +319,13 @@ const PlanForm = ({ setValidCheck, setMultipleList, date, disabled }) => {
               onClick={createLists}
             >
               save
+            </button>
+            <button
+              type="button"
+              className="btn btn-reset"
+              onClick={clearValues}
+            >
+              reset
             </button>
           </div>
           <ul className="error-message">
