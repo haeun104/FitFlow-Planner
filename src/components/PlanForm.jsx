@@ -137,7 +137,15 @@ const PlanForm = ({ setValidCheck, setMultipleList, date, disabled }) => {
         ...prev,
       }));
       setValidCheck(validation);
-      setMultipleList((prev) => [...prev, singleList]);
+      setMultipleList((prev) => [
+        ...prev,
+        {
+          ...singleList,
+          sets: singleList.sets === "" ? 0 : singleList.sets,
+          minutes: singleList.minutes === "" ? 0 : singleList.minutes,
+          weight: singleList.weight === "" ? 0 : singleList.weight,
+        },
+      ]);
     }
   };
 

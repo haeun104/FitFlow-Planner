@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { updateIsDoneDB, updateIsClosedDB } from "../data/firebase";
+import { updateIsDoneDB } from "../data/firebase";
 import PlanModal from "./PlanModal";
 
 const UpdateDetails = ({ filteredList, detailOpen }) => {
@@ -30,9 +30,8 @@ const UpdateDetails = ({ filteredList, detailOpen }) => {
     setProgressMsg(progress);
   };
 
-  // Finish 클릭할 경우 DB에 클로징 처리
-  const handleFinishClick = (lists) => {
-    updateIsClosedDB(lists);
+  // Finish 클릭할 경우 modal 상태 변경
+  const handleFinishClick = () => {
     setModalOpen(true);
   };
 
@@ -101,7 +100,7 @@ const UpdateDetails = ({ filteredList, detailOpen }) => {
             <button
               type="button"
               className="btn btn-finish"
-              onClick={() => handleFinishClick(filteredList)}
+              onClick={handleFinishClick}
             >
               Finish Exercises
             </button>
@@ -113,6 +112,7 @@ const UpdateDetails = ({ filteredList, detailOpen }) => {
         setModalOpen={setModalOpen}
         type="finish"
         message="Successfully closed!"
+        data={filteredList}
       />
     </>
   );

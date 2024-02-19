@@ -70,7 +70,7 @@ const UpdateList = ({ summary }) => {
         setModalOpen={setModalOpen}
         type="delete"
         message="Are you sure to delete? Deleted data will not be restored."
-        id={id}
+        data={id}
       />
     </>
   );

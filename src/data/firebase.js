@@ -53,7 +53,6 @@ export async function addDataToDb(lists) {
 // Firestore에 변경된 목록을 업데이트
 export async function updateDataToDb(lists) {
   const newItems = lists.filter((item) => !("id" in item));
-  console.log(newItems);
   const id = [...new Set(lists.map((item) => item.id))].filter(
     (item) => item !== undefined
   );
@@ -68,7 +67,6 @@ export async function updateDataToDb(lists) {
       }
     });
     for (let item of newItems) {
-      console.log(item);
       await addDoc(collection(db, "plan"), item);
     }
   } catch (error) {
