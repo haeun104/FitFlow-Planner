@@ -26,8 +26,12 @@ const UpdateDetails = ({ filteredList, detailOpen }) => {
     const progress = Math.round(
       (checkedItems.length / updatedList.length) * 100
     );
-    setProgressSaved(true);
-    setProgressMsg(progress);
+    if (checkedItems.length === 0) {
+      setProgressSaved(false);
+    } else {
+      setProgressSaved(true);
+      setProgressMsg(progress);
+    }
   };
 
   // Finish 클릭할 경우 modal 상태 변경
@@ -111,8 +115,8 @@ const UpdateDetails = ({ filteredList, detailOpen }) => {
         modalOpen={modalOpen}
         setModalOpen={setModalOpen}
         type="finish"
-        message="Successfully closed!"
-        data={filteredList}
+        message="Are you sure to finish? Closed data will not be returned."
+        data={updatedList}
       />
     </>
   );

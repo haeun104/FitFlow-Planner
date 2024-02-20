@@ -55,6 +55,14 @@ const PlanModal = ({ message, modalOpen, setModalOpen, type, data }) => {
               <>
                 <button
                   type="button"
+                  className="btn btn-close-modal"
+                  data-bs-dismiss="modal"
+                  onClick={goBack}
+                >
+                  Cancel
+                </button>
+                <button
+                  type="button"
                   className="btn btn-ok"
                   data-bs-dismiss="modal"
                   onClick={() => handleCloseDb(data)}
@@ -71,7 +79,7 @@ const PlanModal = ({ message, modalOpen, setModalOpen, type, data }) => {
                   data-bs-dismiss="modal"
                   onClick={goBack}
                 >
-                  Close
+                  Cancel
                 </button>
                 <button
                   type="button"
