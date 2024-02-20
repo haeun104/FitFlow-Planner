@@ -35,24 +35,19 @@ const PlanLists = ({
     navigate(-1);
   };
 
+  // 해당 일자가 DB에 존재하는지 확인
   const checkExistingDate = (list) => {
     const date = [...new Set(list.map((item) => item.date))].join();
-    const existingDate = dbList.filter((item) => item.date === date).length;
-    return existingDate > 0 ? true : false;
+    const existingDate = dbList.filter((item) => item.date === date);
+    return existingDate.length > 0 ? true : false;
   };
 
+  // Save 클릭 시 체크 후 DB에 저장
   const handleSaveClick = (list) => {
-    if (type === "new") {
-      if (checkExistingDate(list)) {
-        setError("Plan already exists on this day.");
-      } else {
-        handleDataToDb(list);
-        setFinalList([]);
-        setModalOpen(true);
-      }
+    if (type === "new" && checkExistingDate(list)) {
+      setError("Plan already exists on this day.");
     } else {
       handleDataToDb(list);
-      setFinalList([]);
       setModalOpen(true);
     }
   };
