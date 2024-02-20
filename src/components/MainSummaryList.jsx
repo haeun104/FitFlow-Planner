@@ -11,10 +11,9 @@ const MainSummaryList = () => {
 
   const today = new Date();
   const nextWeek = today.setDate(today.getDate() + 7);
-  const nextWeekTimestamp = new Date(nextWeek).getTime();
 
   const nextWeekList = summarizedList.filter(
-    (item) => new Date(item.date) < nextWeekTimestamp
+    (item) => new Date(item.date) < nextWeek
   );
 
   return (
