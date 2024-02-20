@@ -27,7 +27,6 @@ const PlanForm = ({ setValidCheck, setMultipleList, date, disabled }) => {
   }, []);
 
   // search bar 입력 시 운동 목록 업데이트
-
   const updateSearchBar = (e) => {
     setSearchBar(e.target.value);
   };
@@ -82,10 +81,6 @@ const PlanForm = ({ setValidCheck, setMultipleList, date, disabled }) => {
     const { name, value } = e.target;
     if (name === "date") {
       setMultipleList([]);
-      setSingleList((prev) => ({
-        ...prev,
-        [name]: value,
-      }));
     }
     setSingleList((prev) => ({
       ...prev,
@@ -99,30 +94,33 @@ const PlanForm = ({ setValidCheck, setMultipleList, date, disabled }) => {
     const planDate = new Date(singleList.date);
 
     setError([]);
+
+    const addError = (message) => setError((prev) => [...prev, message]);
+
     let validation = true;
     if (!singleList.date) {
       validation = false;
-      setError((prev) => [...prev, "Select date!"]);
+      addError("Select date!");
     }
     if (planDate < today) {
       validation = false;
-      setError((prev) => [...prev, "You can't select past date."]);
+      addError("You can't select past date.");
     }
     if (singleList.category === "") {
       validation = false;
-      setError((prev) => [...prev, "Category must be input."]);
+      addError("Category must be input.");
     }
     if (singleList.name === "") {
       validation = false;
-      setError((prev) => [...prev, "Exercise name must be input."]);
+      addError("Exercise name must be input.");
     }
     if (singleList.sets <= 0 && singleList.minutes <= 0) {
       validation = false;
-      setError((prev) => [...prev, "Sets or Minutes must be more than zero."]);
+      addError("Sets or Minutes must be more than zero.");
     }
     if (singleList.sets === "" && singleList.minutes === "") {
       validation = false;
-      setError((prev) => [...prev, "Sets or Minutes must be input."]);
+      addError("Sets or Minutes must be input.");
     }
     if (
       singleList.sets < 0 ||
@@ -130,12 +128,9 @@ const PlanForm = ({ setValidCheck, setMultipleList, date, disabled }) => {
       singleList.weight < 0
     ) {
       validation = false;
-      setError((prev) => [...prev, "Value must be more than zero."]);
+      addError("Value must be more than zero.");
     }
     if (validation) {
-      setSingleList((prev) => ({
-        ...prev,
-      }));
       setValidCheck(validation);
       setMultipleList((prev) => [
         ...prev,
@@ -173,7 +168,7 @@ const PlanForm = ({ setValidCheck, setMultipleList, date, disabled }) => {
           id="date"
           value={singleList.date}
           name="date"
-          onChange={(e) => updateSingleList(e)}
+          onChange={updateSingleList}
           disabled={disabled}
           min={getFormattedDate(new Date())}
         />
@@ -188,7 +183,7 @@ const PlanForm = ({ setValidCheck, setMultipleList, date, disabled }) => {
           id="search-bar"
           placeholder="Enter exercise name"
           value={searchBar}
-          onChange={(e) => updateSearchBar(e)}
+          onChange={updateSearchBar}
           onKeyDown={handleKeyDown}
           onKeyUp={handleKeyUp}
         />
@@ -258,7 +253,7 @@ const PlanForm = ({ setValidCheck, setMultipleList, date, disabled }) => {
               placeholder="Enter category"
               value={singleList.category}
               name="category"
-              onChange={(e) => updateSingleList(e)}
+              onChange={updateSingleList}
             />
           </div>
           <div className="mb-3">
@@ -272,7 +267,7 @@ const PlanForm = ({ setValidCheck, setMultipleList, date, disabled }) => {
               placeholder="Enter exercise name"
               value={singleList.name}
               name="name"
-              onChange={(e) => updateSingleList(e)}
+              onChange={updateSingleList}
             />
           </div>
           <div className="mb-3">
@@ -287,7 +282,7 @@ const PlanForm = ({ setValidCheck, setMultipleList, date, disabled }) => {
               placeholder="Enter number of sets"
               value={singleList.sets}
               name="sets"
-              onChange={(e) => updateSingleList(e)}
+              onChange={updateSingleList}
             />
           </div>
           <div className="mb-3">
@@ -302,7 +297,7 @@ const PlanForm = ({ setValidCheck, setMultipleList, date, disabled }) => {
               placeholder="Enter minutes"
               value={singleList.minutes}
               name="minutes"
-              onChange={(e) => updateSingleList(e)}
+              onChange={updateSingleList}
             />
           </div>
           <div className="mb-3">
@@ -317,7 +312,7 @@ const PlanForm = ({ setValidCheck, setMultipleList, date, disabled }) => {
               placeholder="Enter weight"
               value={singleList.weight}
               name="weight"
-              onChange={(e) => updateSingleList(e)}
+              onChange={updateSingleList}
             />
           </div>
           <div className="mb-3 exercise-save">
