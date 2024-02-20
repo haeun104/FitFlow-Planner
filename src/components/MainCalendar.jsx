@@ -1,6 +1,6 @@
 import Calendar from "react-calendar";
 import { useContext, useEffect, useState } from "react";
-import { getFormattedDate } from "../utils/utils";
+import { getFormattedDate, getFormattedMonth } from "../utils/utils";
 import "react-calendar/dist/Calendar.css";
 import { useNavigate } from "react-router-dom";
 import { DataContext } from "../App";
@@ -8,7 +8,9 @@ import { DataContext } from "../App";
 const MainCalendar = ({ updateClickedDate }) => {
   const { dbList } = useContext(DataContext);
   const [date, setDate] = useState(new Date());
-  const [currentMonth, setCurrenMonth] = useState(getFormattedDate(new Date()));
+  const [currentMonth, setCurrenMonth] = useState(
+    getFormattedMonth(new Date())
+  );
   const [completionRatio, setCompletionRatio] = useState(0);
 
   const navigate = useNavigate();
@@ -24,12 +26,23 @@ const MainCalendar = ({ updateClickedDate }) => {
     ...new Set(incompleteDays.map((item) => item.date)),
   ];
 
+  // 특정 날짜 선택 시 해당 날짜를 메인 페이지로 전달, DB에 없을 시 생성 페이지로 이동
+  const clickDate = (date) => {
+    const formattedDate = getFormattedDate(date);
+    setDate(date);
+    updateClickedDate(formattedDate);
+    const existingDateInDb = dbList.filter(
+      (item) => item.date === formattedDate
+    );
+    if (existingDateInDb.length === 0) {
+      navigate(`/new/${formattedDate}`);
+    }
+  };
+
   // currentMonth가 바뀔때 마다 해당 월의 ratio 업데이트
   useEffect(() => {
     const currentMonthData = dbList.filter(
-      (item) =>
-        item.isClosed &&
-        item.date.substring(0, 7) === currentMonth.substring(0, 7)
+      (item) => item.isClosed && item.date.substring(0, 7) === currentMonth
     );
     const completePlans = currentMonthData.filter((item) => item.isDone);
     setCompletionRatio(
@@ -37,17 +50,9 @@ const MainCalendar = ({ updateClickedDate }) => {
     );
   }, [currentMonth]);
 
-  // 특정 날짜 선택 시 해당 날짜를 메인 페이지로 전달, DB에 없을 시 생성 페이지로 이동
-  const clickDate = (date) => {
-    const formattedDate = getFormattedDate(date);
-    setDate(date);
-    updateClickedDate(formattedDate);
-    if (
-      !listOfIncompleteDays.includes(formattedDate) &&
-      !listOfcompleteDays.includes(formattedDate)
-    ) {
-      navigate(`/new/${formattedDate}`);
-    }
+  //월 이동 시 currentMonth 업데이트
+  const updateCurrentMonth = ({ activeStartDate }) => {
+    setCurrenMonth(getFormattedMonth(activeStartDate));
   };
 
   // 계획 달성 여부에 따라 클래스 생성
@@ -58,11 +63,6 @@ const MainCalendar = ({ updateClickedDate }) => {
     if (listOfIncompleteDays.includes(getFormattedDate(date))) {
       return <div className="incompleteDay"></div>;
     }
-  };
-
-  //월 이동 시 currentMonth 업데이트
-  const updateCurrentMonth = ({ activeStartDate }) => {
-    setCurrenMonth(getFormattedDate(activeStartDate));
   };
 
   return (

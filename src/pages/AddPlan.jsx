@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import PlanForm from "../components/PlanForm";
 import PlanLists from "../components/PlanLists";
 import { addDataToDb } from "../data/firebase";

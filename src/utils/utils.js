@@ -11,3 +11,12 @@ export const getFormattedDate = (date) => {
 
   return `${year}-${month}-${day}`;
 };
+
+export const getFormattedMonth = (date) => {
+  let year = date.getFullYear();
+  let month = date.getMonth() + 1;
+  if (month < 10) {
+    month = `0${month}`;
+  }
+  return `${year}-${month}`;
+};

@@ -26,6 +26,7 @@ function App() {
     return () => unsubscribe();
   }, []);
 
+  // firestore 데이터를 날짜 기준으로 재구성한 리스트 생성
   useEffect(() => {
     if (dbList) {
       const incompleteList = dbList.filter((item) => !item.isClosed);
