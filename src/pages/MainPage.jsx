@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useCallback, useContext, useState } from "react";
 import MainCalendar from "../components/MainCalendar";
 import MainModal from "../components/MainModal";
 import MainSummaryList from "../components/MainSummaryList";
@@ -11,11 +11,11 @@ const MainPage = () => {
   const [clickedDate, setClickedDate] = useState();
   const [modalOpen, setModalOpen] = useState(false);
 
-  const updateClickedDate = (clickedDate) => {
-    setClickedDate(clickedDate);
-    setModalOpen(true);
-    setModalData(dbList.filter((item) => item.date === clickedDate));
-  };
+  const updateClickedDate = useCallback((clickedDate) => {
+    setClickedDate(() => clickedDate);
+    setModalOpen(() => true);
+    setModalData(() => dbList.filter((item) => item.date === clickedDate));
+  }, []);
 
   return (
     <div className="container">

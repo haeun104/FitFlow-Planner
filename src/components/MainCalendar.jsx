@@ -1,5 +1,5 @@
 import Calendar from "react-calendar";
-import { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { getFormattedDate, getFormattedMonth } from "../utils/utils";
 import "react-calendar/dist/Calendar.css";
 import { useNavigate } from "react-router-dom";
@@ -91,4 +91,4 @@ const MainCalendar = ({ updateClickedDate }) => {
   );
 };
 
-export default MainCalendar;
+export default React.memo(MainCalendar);
