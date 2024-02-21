@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { DataContext } from "../App";
 
@@ -41,4 +41,4 @@ const MainSummaryList = () => {
   );
 };
 
-export default MainSummaryList;
+export default React.memo(MainSummaryList);
