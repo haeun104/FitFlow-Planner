@@ -80,6 +80,7 @@ export async function deleteDataDb(listOfId) {
     for (let id of listOfId) {
       const docRef = doc(db, "plan", id);
       await deleteDoc(docRef);
+      console.log("document is deleted successfully");
     }
   } catch (error) {
     console.error(error);
@@ -92,7 +93,7 @@ export async function updateIsDoneDB(lists) {
     for (let list of lists) {
       const docRef = doc(collection(db, "plan"), list.id);
       await updateDoc(docRef, { isDone: list.isDone });
-      console.log("document is updated successfully");
+      console.log("IsDone is updated successfully");
     }
   } catch (error) {
     console.error(error);
@@ -105,7 +106,7 @@ export async function updateIsClosedDB(lists) {
     for (let list of lists) {
       const docRef = doc(collection(db, "plan"), list.id);
       await updateDoc(docRef, { isClosed: true });
-      console.log("document is updated successfully");
+      console.log("IsClose is updated successfully");
     }
   } catch (error) {
     console.error(error);
