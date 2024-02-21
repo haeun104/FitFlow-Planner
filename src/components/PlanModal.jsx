@@ -20,8 +20,10 @@ const PlanModal = ({ message, modalOpen, setModalOpen, type, data }) => {
 
   const goBack = () => {
     setModalOpen(false);
-    if (type === "save") {
+    if (type === "new") {
       navigate("/");
+    } else if (type === "edit") {
+      navigate("/update");
     } else {
       navigate("/update");
     }
@@ -39,7 +41,7 @@ const PlanModal = ({ message, modalOpen, setModalOpen, type, data }) => {
             <p>{message}</p>
           </div>
           <div className="modal-footer">
-            {type === "save" && (
+            {type === "new" || type === "edit" ? (
               <>
                 <button
                   type="button"
@@ -50,7 +52,7 @@ const PlanModal = ({ message, modalOpen, setModalOpen, type, data }) => {
                   OK
                 </button>
               </>
-            )}
+            ) : null}
             {type === "finish" && (
               <>
                 <button

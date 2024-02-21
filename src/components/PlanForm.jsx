@@ -18,7 +18,7 @@ const PlanForm = ({ setValidCheck, setMultipleList, date, disabled }) => {
   });
   const [error, setError] = useState([]);
   const [categoryOpen, setCategoryOpen] = useState(true);
-  const [searchBar, setSearchBar] = useState();
+  const [searchBar, setSearchBar] = useState("");
   const [searchBarEx, setSearchBarEx] = useState([]);
 
   // 마운팅 시점에 설정된 카테고리로 필터링 실행

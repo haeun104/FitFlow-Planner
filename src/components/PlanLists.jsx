@@ -105,7 +105,7 @@ const PlanLists = ({
       <PlanModal
         modalOpen={modalOpen}
         setModalOpen={setModalOpen}
-        type="save"
+        type={type}
         message="Successfully saved!"
       />
     </>
