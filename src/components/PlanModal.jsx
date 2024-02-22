@@ -8,14 +8,14 @@ const PlanModal = ({ message, modalOpen, setModalOpen, type, data }) => {
 
   const navigate = useNavigate();
 
-  // DB에서 데이터 클로징
+  // Update isClose status in DB
   const handleCloseDb = (data) => {
     updateIsClosedDB(data);
     setModalMessage("Successfully closed.");
     setModalType("edit");
   };
 
-  // DB에서 데이터 삭제
+  // Delete lists in DB
   const handleDeleteDb = (data) => {
     deleteDataDb(data);
     setModalMessage("Successfully deleted.");

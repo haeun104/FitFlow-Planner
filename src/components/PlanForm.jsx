@@ -21,12 +21,12 @@ const PlanForm = ({ setValidCheck, setMultipleList, date, disabled }) => {
   const [searchBar, setSearchBar] = useState("");
   const [searchBarEx, setSearchBarEx] = useState([]);
 
-  // 마운팅 시점에 설정된 카테고리로 필터링 실행
+  // Update the exercises list when mounting
   useEffect(() => {
     setExercises(exerciseList.filter((item) => item.category === category));
   }, []);
 
-  // search bar 입력 시 운동 목록 업데이트
+  // Update the exercises list when value is input in the search bar
   const updateSearchBar = (e) => {
     setSearchBar(e.target.value);
   };
@@ -46,10 +46,10 @@ const PlanForm = ({ setValidCheck, setMultipleList, date, disabled }) => {
     );
   };
 
-  // exerciseList 파일에 존재하는 카테고리 목록 추출 (중복 제거)
+  // List of categories removing duplicated values
   const categoryList = [...new Set(exerciseList.map((item) => item.category))];
 
-  // 카테고리 선택 시 exerciseList 목록에서 필터링
+  // Filter exercise lists when a certain category is clicked
   const filterExercises = (e) => {
     const filteredEx = exerciseList.filter(
       (item) => item.category === e.target.value
@@ -58,7 +58,7 @@ const PlanForm = ({ setValidCheck, setMultipleList, date, disabled }) => {
     setExercises(filteredEx);
   };
 
-  // 필터링된 리스트에서 특정 아이템 클릭 시 하단에 계획 칸을 보여줌
+  // Fill the selected exercise name and its category in a plan when a certain exercise is clicked
   const addToList = (name, category) => {
     setPlanOpen(true);
     setSingleList((prev) => ({
@@ -71,12 +71,12 @@ const PlanForm = ({ setValidCheck, setMultipleList, date, disabled }) => {
     }));
   };
 
-  // Add Exercises 클릭 시 하단에 계획 칸을 보여줌
+  // Show plan inputs when Add Exercises is clicked
   const openPlan = () => {
     setPlanOpen(true);
   };
 
-  // Input 값 입력 시 state 업데이트
+  // Update state when input value is changed
   const updateSingleList = (e) => {
     const { name, value } = e.target;
     if (name === "date") {
@@ -88,7 +88,7 @@ const PlanForm = ({ setValidCheck, setMultipleList, date, disabled }) => {
     }));
   };
 
-  // 저장 클릭 시 Validation 체크 및 SetMultipleList로 전달
+  // Check validation and update multipleList when save button is clicked
   const createLists = () => {
     const today = new Date(getFormattedDate(new Date()));
     const planDate = new Date(singleList.date);
@@ -144,7 +144,7 @@ const PlanForm = ({ setValidCheck, setMultipleList, date, disabled }) => {
     }
   };
 
-  // reset 클릭 시 input 값 clear
+  // Clear input values when reset button is clicked
   const clearValues = () => {
     setSingleList((prev) => ({
       ...prev,

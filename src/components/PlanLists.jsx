@@ -23,26 +23,26 @@ const PlanLists = ({
     setError("");
   }, [multipleList]);
 
-  //  삭제 버튼 클릭 시 목록에서 삭제
+  //  Delete the list when the delete icon is clicked
   const deleteList = (index) => {
     const newArray = [...multipleList];
     newArray.splice(index, 1);
     setMultipleList(newArray);
   };
 
-  // 취소 버튼 클릭 시 이전 페이지로 돌아감
+  // Go to a previous page when cancel button is clicked
   const goBack = () => {
     navigate(-1);
   };
 
-  // 해당 일자가 DB에 존재하는지 확인
+  // Check if the selected date already exists in DB
   const checkExistingDate = (list) => {
     const date = [...new Set(list.map((item) => item.date))].join();
     const existingDate = dbList.filter((item) => item.date === date);
     return existingDate.length > 0 ? true : false;
   };
 
-  // Save 클릭 시 체크 후 DB에 저장
+  // Add lits in DB when save button is clicked
   const handleSaveClick = (list) => {
     if (type === "new" && checkExistingDate(list)) {
       setError("Plan already exists on this day.");

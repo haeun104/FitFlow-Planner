@@ -15,7 +15,7 @@ const MainCalendar = ({ updateClickedDate }) => {
 
   const navigate = useNavigate();
 
-  // DB 데이터에서 close 여부 구분
+  // Variables of incomplete and complete plans
   const completeDays = dbList.filter((item) => item.isClosed);
   const incompleteDays = dbList.filter((item) => !item.isClosed);
 
@@ -26,7 +26,7 @@ const MainCalendar = ({ updateClickedDate }) => {
     ...new Set(incompleteDays.map((item) => item.date)),
   ];
 
-  // 특정 날짜 선택 시 해당 날짜를 메인 페이지로 전달, DB에 없을 시 생성 페이지로 이동
+  // Deliver the clicked date or move to the add page
   const clickDate = (date) => {
     const formattedDate = getFormattedDate(date);
     setDate(date);
@@ -39,7 +39,7 @@ const MainCalendar = ({ updateClickedDate }) => {
     }
   };
 
-  // currentMonth가 바뀔때 마다 해당 월의 ratio 업데이트
+  // Update completion ration when currentMonth is changed
   useEffect(() => {
     const currentMonthData = dbList.filter(
       (item) => item.isClosed && item.date.substring(0, 7) === currentMonth
@@ -50,12 +50,12 @@ const MainCalendar = ({ updateClickedDate }) => {
     );
   }, [currentMonth]);
 
-  //월 이동 시 currentMonth 업데이트
+  // Update currentMonth when viewing month is changed
   const updateCurrentMonth = ({ activeStartDate }) => {
     setCurrenMonth(getFormattedMonth(activeStartDate));
   };
 
-  // 계획 달성 여부에 따라 클래스 생성
+  // Create class based on close status
   const addClass = ({ date }) => {
     if (listOfcompleteDays.includes(getFormattedDate(date))) {
       return <div className="completeDay"></div>;

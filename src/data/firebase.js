@@ -20,12 +20,12 @@ const firebaseConfig = {
   appId: "1:504609888:web:87089ed4300d8ccd1ad705",
 };
 
-// Firebase 앱 인스턴스를 이용하여 Firestore 데이터베이스를 초기화
+// Initialize the Firestore database using the Firebase app instance
 const app = initializeApp(firebaseConfig);
 
 export const db = getFirestore(app);
 
-// Firestore에서 데이터를 가져오는 함수
+// Fetch data from Firestore
 export async function fetchDataFromDb() {
   try {
     const querySnapshot = await getDocs(collection(db, "plan"));
@@ -38,7 +38,7 @@ export async function fetchDataFromDb() {
   }
 }
 
-// Firestore에 새 목록을 추가
+// Add new lists in Firestore
 export async function addDataToDb(lists) {
   try {
     for (let list of lists) {
@@ -50,7 +50,7 @@ export async function addDataToDb(lists) {
   }
 }
 
-// Firestore에 변경된 목록을 업데이트
+// Update edited lists in Firestore
 export async function updateDataToDb(lists) {
   const newItems = lists.filter((item) => !("id" in item));
   const id = [...new Set(lists.map((item) => item.id))].filter(
@@ -74,7 +74,7 @@ export async function updateDataToDb(lists) {
   }
 }
 
-// Firestore에 데이터 삭제
+// Delete data in Firestore
 export async function deleteDataDb(listOfId) {
   try {
     for (let id of listOfId) {
@@ -87,7 +87,7 @@ export async function deleteDataDb(listOfId) {
   }
 }
 
-// Firestore 에 isDone 상태 업데이트
+// Update isDone status in Firestore
 export async function updateIsDoneDB(lists) {
   try {
     for (let list of lists) {
@@ -100,7 +100,7 @@ export async function updateIsDoneDB(lists) {
   }
 }
 
-// Firestore에 isClose 상태 업데이트
+// Update isClose status in Firestore
 export async function updateIsClosedDB(lists) {
   try {
     for (let list of lists) {

@@ -14,7 +14,7 @@ function App() {
   const [dbList, setDbList] = useState();
   const [summarizedList, setSummarizedList] = useState([]);
 
-  // firestore 실시간 데이터 동기화
+  // Real-time synchronization of Firestore data
   useEffect(() => {
     const unsubscribe = onSnapshot(collection(db, "plan"), (snapshot) => {
       const newData = [];
@@ -26,7 +26,7 @@ function App() {
     return () => unsubscribe();
   }, []);
 
-  // firestore 데이터를 날짜 기준으로 재구성한 리스트 생성
+  // Create reorganized lists by date
   useEffect(() => {
     if (dbList) {
       const incompleteList = dbList.filter((item) => !item.isClosed);

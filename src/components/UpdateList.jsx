@@ -19,13 +19,13 @@ const UpdateList = ({ summary }) => {
 
   const { date, category, name, id } = summary;
 
-  // 클릭한 일자의 상세 데이터를 가져옴
+  // Filter DB lists on the clicked date
   const getDetails = (date) => {
     const filteredList = dbList.filter((item) => item.date === date);
     return filteredList;
   };
 
-  // Edit 페이지로 이동
+  // Go to Edit page
   const goEditPage = (selectedDate) => {
     navigate(`/edit/${selectedDate}`);
   };

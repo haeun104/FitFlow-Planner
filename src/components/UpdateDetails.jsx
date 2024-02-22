@@ -8,14 +8,14 @@ const UpdateDetails = ({ filteredList, detailOpen }) => {
   const [progressMsg, setProgressMsg] = useState("");
   const [modalOpen, setModalOpen] = useState(false);
 
-  // 완료 체크박스를 클릭할 경우 체크된 아이템의 state를 변경
+  // Update status of completion checkbox when clicked
   const handleCheckbox = (id, checked) => {
     setUpdatedList((prev) =>
       prev.map((item) => (item.id === id ? { ...item, isDone: checked } : item))
     );
   };
 
-  // Save를 클릭할 경우 진척 %를 업데이트, DB에 데이터를 업데이트
+  // Update isDone status in DB and calculate progress when clicked Save
   const sendCheckboxIdToDB = (lists) => {
     updateIsDoneDB(lists);
     getProgress();
@@ -34,7 +34,7 @@ const UpdateDetails = ({ filteredList, detailOpen }) => {
     }
   };
 
-  // Finish 클릭할 경우 modal 상태 변경
+  // Update modal status when clicked Finish
   const handleFinishClick = () => {
     setModalOpen(true);
   };
