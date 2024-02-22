@@ -35,8 +35,10 @@ const PlanModal = ({
       navigate("/");
     } else if (modalType === "edit") {
       navigate("/update");
-    } else {
+    } else if (modalType === "closed") {
       resetUpdatedList();
+      navigate("/update");
+    } else {
       navigate("/update");
     }
   };
