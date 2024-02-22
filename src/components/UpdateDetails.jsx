@@ -18,14 +18,12 @@ const UpdateDetails = ({ filteredList, detailOpen }) => {
   // Update isDone status in DB and calculate progress when clicked Save
   const sendCheckboxIdToDB = (lists) => {
     updateIsDoneDB(lists);
-    getProgress();
+    getProgress(lists);
   };
 
-  const getProgress = () => {
-    const checkedItems = updatedList.filter((item) => item.isDone);
-    const progress = Math.round(
-      (checkedItems.length / updatedList.length) * 100
-    );
+  const getProgress = (list) => {
+    const checkedItems = list.filter((item) => item.isDone);
+    const progress = Math.round((checkedItems.length / list.length) * 100);
     if (checkedItems.length === 0) {
       setProgressSaved(false);
     } else {
@@ -37,6 +35,12 @@ const UpdateDetails = ({ filteredList, detailOpen }) => {
   // Update modal status when clicked Finish
   const handleFinishClick = () => {
     setModalOpen(true);
+  };
+
+  // Reset updateList after other plan is closed
+  const resetUpdatedList = () => {
+    setUpdatedList(filteredList);
+    getProgress(filteredList);
   };
 
   return (
@@ -117,6 +121,7 @@ const UpdateDetails = ({ filteredList, detailOpen }) => {
         type="finish"
         message="Are you sure to finish? Closed data will not be returned."
         data={updatedList}
+        resetUpdatedList={resetUpdatedList}
       />
     </>
   );

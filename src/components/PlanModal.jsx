@@ -2,7 +2,14 @@ import { useNavigate } from "react-router-dom";
 import { deleteDataDb, updateIsClosedDB } from "../data/firebase";
 import { useState } from "react";
 
-const PlanModal = ({ message, modalOpen, setModalOpen, type, data }) => {
+const PlanModal = ({
+  message,
+  modalOpen,
+  setModalOpen,
+  type,
+  data,
+  resetUpdatedList,
+}) => {
   const [modalMessage, setModalMessage] = useState(message);
   const [modalType, setModalType] = useState(type);
 
@@ -12,7 +19,7 @@ const PlanModal = ({ message, modalOpen, setModalOpen, type, data }) => {
   const handleCloseDb = (data) => {
     updateIsClosedDB(data);
     setModalMessage("Successfully closed.");
-    setModalType("edit");
+    setModalType("closed");
   };
 
   // Delete lists in DB
@@ -29,9 +36,13 @@ const PlanModal = ({ message, modalOpen, setModalOpen, type, data }) => {
     } else if (modalType === "edit") {
       navigate("/update");
     } else {
+      resetUpdatedList();
       navigate("/update");
     }
   };
+
+  const modalTypes =
+    modalType === "new" || modalType === "edit" || modalType === "closed";
 
   return (
     <div
@@ -45,7 +56,7 @@ const PlanModal = ({ message, modalOpen, setModalOpen, type, data }) => {
             <p>{modalMessage}</p>
           </div>
           <div className="modal-footer">
-            {modalType === "new" || modalType === "edit" ? (
+            {modalTypes ? (
               <>
                 <button type="button" className="btn btn-ok" onClick={goBack}>
                   OK
