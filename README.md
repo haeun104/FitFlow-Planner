@@ -10,3 +10,8 @@ A daily planner for fitness exercises providing the following main functions.
 ## Authors
 
 - [@haeun104](https://github.com/haeun104)
+
+## 🛠 Skills
+
+Javascript, HTML, Sass, React
+
