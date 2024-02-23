@@ -33,6 +33,11 @@
   }
 }
 
+.btn-edit-disable:disabled {
+  border: none;
+  background-color: $button-color;
+}
+
 .btn-ok {
   background-color: $button-color;
   color: white;

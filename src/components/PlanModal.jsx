@@ -17,16 +17,16 @@ const PlanModal = ({
 
   // Update isClose status in DB
   const handleCloseDb = (data) => {
-    updateIsClosedDB(data);
     setModalMessage("Successfully closed.");
     setModalType("closed");
+    updateIsClosedDB(data);
   };
 
   // Delete lists in DB
   const handleDeleteDb = (data) => {
-    deleteDataDb(data);
     setModalMessage("Successfully deleted.");
     setModalType("edit");
+    deleteDataDb(data);
   };
 
   const goBack = () => {

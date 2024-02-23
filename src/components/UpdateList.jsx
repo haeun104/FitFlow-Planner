@@ -34,6 +34,11 @@ const UpdateList = ({ summary }) => {
     setModalOpen(true);
   };
 
+  // Check if there is a past date on the list
+  const currentDate = new Date();
+  const previousDate = currentDate.setDate(currentDate.getDate() - 1);
+  const isPastDate = new Date(date) < previousDate;
+
   return (
     <>
       <li className="list-group-item update-list">
@@ -54,8 +59,9 @@ const UpdateList = ({ summary }) => {
           </button>
           <button
             type="button"
-            className="btn btn-edit"
+            className={`btn btn-edit ${isPastDate && "btn-edit-disable"}`}
             onClick={() => goEditPage(date)}
+            disabled={isPastDate}
           >
             Edit
           </button>

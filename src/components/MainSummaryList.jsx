@@ -12,9 +12,12 @@ const MainSummaryList = () => {
   const today = new Date();
   const nextWeek = today.setDate(today.getDate() + 7);
 
-  const nextWeekList = summarizedList.filter(
-    (item) => new Date(item.date) < nextWeek
-  );
+  const nextWeekList = summarizedList.filter((item) => {
+    const itemDate = new Date(item.date);
+    const currentDate = new Date();
+    const previousDate = currentDate.setDate(currentDate.getDate() - 1);
+    return itemDate < nextWeek && previousDate < itemDate;
+  });
 
   return (
     <div className="main-summary">
