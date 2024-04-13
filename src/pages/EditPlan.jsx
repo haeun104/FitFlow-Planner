@@ -14,7 +14,7 @@ const EditPlan = () => {
 
   useEffect(() => {
     setMultipleList(dbList.filter((item) => item.date === date));
-  }, []);
+  }, [date, dbList]);
 
   return (
     <div className="container">

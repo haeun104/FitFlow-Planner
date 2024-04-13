@@ -48,7 +48,7 @@ const MainCalendar = ({ updateClickedDate }) => {
     setCompletionRatio(
       Math.round((completePlans.length / currentMonthData.length) * 100)
     );
-  }, [currentMonth]);
+  }, [currentMonth, dbList]);
 
   // Update currentMonth when viewing month is changed
   const updateCurrentMonth = ({ activeStartDate }) => {
@@ -84,7 +84,7 @@ const MainCalendar = ({ updateClickedDate }) => {
         </div>
       </div>
       <div className="completion-ratio">
-        This month's average completion ratio:{" "}
+        This month&apos;s average completion ratio:{" "}
         <span>{completionRatio || 0} %</span>
       </div>
     </div>

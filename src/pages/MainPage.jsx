@@ -15,7 +15,7 @@ const MainPage = () => {
     setClickedDate(() => clickedDate);
     setModalOpen(() => true);
     setModalData(() => dbList.filter((item) => item.date === clickedDate));
-  }, []);
+  }, [dbList]);
 
   return (
     <div className="container">

@@ -24,7 +24,7 @@ const PlanForm = ({ setValidCheck, setMultipleList, date, disabled }) => {
   // Update the exercises list when mounting
   useEffect(() => {
     setExercises(exerciseList.filter((item) => item.category === category));
-  }, []);
+  }, [category]);
 
   // Update the exercises list when value is input in the search bar
   const updateSearchBar = (e) => {
