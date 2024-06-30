@@ -1,3 +1,5 @@
+import PropTypes from "prop-types";
+
 const MainModal = ({ modalData, clickedDate, modalOpen, setModalOpen }) => {
   const closeModal = () => {
     setModalOpen(false);
@@ -59,6 +61,13 @@ const MainModal = ({ modalData, clickedDate, modalOpen, setModalOpen }) => {
       </div>
     </div>
   );
+};
+
+MainModal.propTypes = {
+  modalData: PropTypes.arrayOf(PropTypes.string).isRequired,
+  clickedDate: PropTypes.string.isRequired,
+  modalOpen: PropTypes.bool.isRequired,
+  setModalOpen: PropTypes.func.isRequired,
 };
 
 export default MainModal;

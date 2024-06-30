@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import exerciseList from "../data/exerciseList";
 import { getFormattedDate } from "../utils/utils";
+import PropTypes from "prop-types";
 
 const PlanForm = ({ setValidCheck, setMultipleList, date, disabled }) => {
   const [exercises, setExercises] = useState([]);
@@ -340,6 +341,13 @@ const PlanForm = ({ setValidCheck, setMultipleList, date, disabled }) => {
       )}
     </form>
   );
+};
+
+PlanForm.propTypes = {
+  setValidCheck: PropTypes.func.isRequired,
+  setMultipleList: PropTypes.func.isRequired,
+  date: PropTypes.string.isRequired,
+  disabled: PropTypes.bool.isRequired,
 };
 
 export default PlanForm;

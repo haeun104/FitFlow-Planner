@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import PlanModal from "./PlanModal";
 import { useNavigate } from "react-router-dom";
 import { DataContext } from "../App";
+import PropTypes from "prop-types";
 
 const PlanLists = ({
   validCheck,
@@ -110,6 +111,25 @@ const PlanLists = ({
       />
     </>
   );
+};
+
+PlanLists.propTypes = {
+  validCheck: PropTypes.bool.isRequired,
+  multipleList: PropTypes.arrayOf(
+    PropTypes.shape({
+      category: PropTypes.string.isRequired,
+      date: PropTypes.string.isRequired,
+      isClosed: PropTypes.bool.isRequired,
+      isDone: PropTypes.bool.isRequired,
+      minutes: PropTypes.number.isRequired,
+      weight: PropTypes.number.isRequired,
+      sets: PropTypes.number.isRequired,
+      name: PropTypes.string.isRequired,
+    })
+  ).isRequired,
+  setMultipleList: PropTypes.func.isRequired,
+  handleDataToDb: PropTypes.func.isRequired,
+  type: PropTypes.string.isRequired,
 };
 
 export default PlanLists;

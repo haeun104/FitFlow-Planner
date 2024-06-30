@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { updateIsDoneDB } from "../data/firebase";
 import PlanModal from "./PlanModal";
+import PropTypes from "prop-types";
 
 const UpdateDetails = ({ filteredList, detailOpen }) => {
   const [updatedList, setUpdatedList] = useState(filteredList);
@@ -125,6 +126,22 @@ const UpdateDetails = ({ filteredList, detailOpen }) => {
       />
     </>
   );
+};
+
+UpdateDetails.propTypes = {
+  filteredList: PropTypes.arrayOf(
+    PropTypes.shape({
+      category: PropTypes.string.isRequired,
+      date: PropTypes.string.isRequired,
+      isClosed: PropTypes.bool.isRequired,
+      isDone: PropTypes.bool.isRequired,
+      minutes: PropTypes.number.isRequired,
+      weight: PropTypes.number.isRequired,
+      sets: PropTypes.number.isRequired,
+      name: PropTypes.string.isRequired,
+    })
+  ).isRequired,
+  detailOpen: PropTypes.bool.isRequired,
 };
 
 export default UpdateDetails;

@@ -4,6 +4,7 @@ import { getFormattedDate, getFormattedMonth } from "../utils/utils";
 import "react-calendar/dist/Calendar.css";
 import { useNavigate } from "react-router-dom";
 import { DataContext } from "../App";
+import PropTypes from "prop-types";
 
 const MainCalendar = ({ updateClickedDate }) => {
   const { dbList } = useContext(DataContext);
@@ -89,6 +90,10 @@ const MainCalendar = ({ updateClickedDate }) => {
       </div>
     </div>
   );
+};
+
+MainCalendar.propTypes = {
+  updateClickedDate: PropTypes.string.isRequired,
 };
 
 export default React.memo(MainCalendar);

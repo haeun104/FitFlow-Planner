@@ -5,6 +5,8 @@ import { useNavigate } from "react-router-dom";
 import PlanModal from "./PlanModal";
 import { DataContext } from "../App";
 
+import PropTypes from "prop-types";
+
 const UpdateList = ({ summary }) => {
   const { dbList } = useContext(DataContext);
 
@@ -80,6 +82,15 @@ const UpdateList = ({ summary }) => {
       />
     </>
   );
+};
+
+UpdateList.propTypes = {
+  summary: PropTypes.shape({
+    category: PropTypes.arrayOf(PropTypes.string).isRequired,
+    date: PropTypes.string.isRequired,
+    name: PropTypes.arrayOf(PropTypes.string).isRequired,
+    id: PropTypes.arrayOf(PropTypes.string).isRequired,
+  }).isRequired,
 };
 
 export default UpdateList;

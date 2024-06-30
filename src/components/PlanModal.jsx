@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { deleteDataDb, updateIsClosedDB } from "../data/firebase";
 import { useState } from "react";
+import PropTypes from "prop-types";
 
 const PlanModal = ({
   message,
@@ -106,6 +107,15 @@ const PlanModal = ({
       </div>
     </div>
   );
+};
+
+PlanModal.propTypes = {
+  message: PropTypes.string.isRequired,
+  modalOpen: PropTypes.bool.isRequired,
+  setModalOpen: PropTypes.func.isRequired,
+  type: PropTypes.string.isRequired,
+  data: PropTypes.string,
+  resetUpdatedList: PropTypes.func,
 };
 
 export default PlanModal;
