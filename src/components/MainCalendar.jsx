@@ -93,7 +93,7 @@ const MainCalendar = ({ updateClickedDate }) => {
 };
 
 MainCalendar.propTypes = {
-  updateClickedDate: PropTypes.string.isRequired,
+  updateClickedDate: PropTypes.func,
 };
 
 export default React.memo(MainCalendar);

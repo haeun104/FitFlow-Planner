@@ -131,9 +131,12 @@ PlanLists.propTypes = {
       date: PropTypes.string.isRequired,
       isClosed: PropTypes.bool.isRequired,
       isDone: PropTypes.bool.isRequired,
-      minutes: PropTypes.number.isRequired,
-      weight: PropTypes.number.isRequired,
-      sets: PropTypes.number.isRequired,
+      minutes: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
+        .isRequired,
+      weight: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
+        .isRequired,
+      sets: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
+        .isRequired,
       name: PropTypes.string.isRequired,
     })
   ).isRequired,

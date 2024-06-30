@@ -72,7 +72,10 @@ const UpdateList = ({ summary }) => {
           </button>
         </div>
       </li>
-      <UpdateDetails filteredList={getDetails(date)} detailOpen={detailOpen} />
+      <UpdateDetails
+        filteredList={getDetails(date)}
+        detailOpen={detailOpen}
+      />
       <PlanModal
         modalOpen={modalOpen}
         setModalOpen={setModalOpen}

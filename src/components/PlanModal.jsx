@@ -17,17 +17,27 @@ const PlanModal = ({
   const navigate = useNavigate();
 
   // Update isClose status in DB
-  const handleCloseDb = (data) => {
-    setModalMessage("Successfully closed.");
-    setModalType("closed");
-    updateIsClosedDB(data);
+  const handleCloseDb = async (data) => {
+    try {
+      await updateIsClosedDB(data);
+      setModalMessage("Successfully closed.");
+      setModalType("closed");
+      navigate(0);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   // Delete lists in DB
-  const handleDeleteDb = (data) => {
-    setModalMessage("Successfully deleted.");
-    setModalType("edit");
-    deleteDataDb(data);
+  const handleDeleteDb = async (data) => {
+    try {
+      await deleteDataDb(data);
+      setModalMessage("Successfully deleted.");
+      setModalType("edit");
+      navigate(0);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const goBack = () => {
@@ -114,8 +124,26 @@ PlanModal.propTypes = {
   modalOpen: PropTypes.bool.isRequired,
   setModalOpen: PropTypes.func.isRequired,
   type: PropTypes.string.isRequired,
-  data: PropTypes.string,
+  data: PropTypes.oneOfType([
+    PropTypes.arrayOf(
+      PropTypes.shape({
+        category: PropTypes.string.isRequired,
+        date: PropTypes.string.isRequired,
+        isClosed: PropTypes.bool.isRequired,
+        isDone: PropTypes.bool.isRequired,
+        minutes: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
+          .isRequired,
+        weight: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
+          .isRequired,
+        sets: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
+          .isRequired,
+        name: PropTypes.string.isRequired,
+      })
+    ),
+    PropTypes.arrayOf(PropTypes.string),
+  ]),
   resetUpdatedList: PropTypes.func,
+  closeDetails: PropTypes.func,
 };
 
 export default PlanModal;

@@ -64,8 +64,22 @@ const MainModal = ({ modalData, clickedDate, modalOpen, setModalOpen }) => {
 };
 
 MainModal.propTypes = {
-  modalData: PropTypes.arrayOf(PropTypes.string).isRequired,
-  clickedDate: PropTypes.string.isRequired,
+  modalData: PropTypes.arrayOf(
+    PropTypes.shape({
+      category: PropTypes.string.isRequired,
+      date: PropTypes.string.isRequired,
+      isClosed: PropTypes.bool.isRequired,
+      isDone: PropTypes.bool.isRequired,
+      minutes: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
+        .isRequired,
+      weight: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
+        .isRequired,
+      sets: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
+        .isRequired,
+      name: PropTypes.string.isRequired,
+    })
+  ),
+  clickedDate: PropTypes.string,
   modalOpen: PropTypes.bool.isRequired,
   setModalOpen: PropTypes.func.isRequired,
 };

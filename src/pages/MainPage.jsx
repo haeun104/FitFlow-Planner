@@ -11,11 +11,14 @@ const MainPage = () => {
   const [clickedDate, setClickedDate] = useState();
   const [modalOpen, setModalOpen] = useState(false);
 
-  const updateClickedDate = useCallback((clickedDate) => {
-    setClickedDate(() => clickedDate);
-    setModalOpen(() => true);
-    setModalData(() => dbList.filter((item) => item.date === clickedDate));
-  }, [dbList]);
+  const updateClickedDate = useCallback(
+    (clickedDate) => {
+      setClickedDate(() => clickedDate);
+      setModalOpen(() => true);
+      setModalData(() => dbList.filter((item) => item.date === clickedDate));
+    },
+    [dbList]
+  );
 
   return (
     <div className="container">
