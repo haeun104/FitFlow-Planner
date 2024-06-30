@@ -25,6 +25,11 @@
   }
 }
 
+.noAdded-exercises-message {
+  text-align: center;
+  margin: 20px 0;
+}
+
 @media screen and (max-width: $xs-size) {
   .row-cols-5 {
     font-size: 12px;

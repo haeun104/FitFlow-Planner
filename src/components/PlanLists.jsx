@@ -33,7 +33,7 @@ const PlanLists = ({
 
   // Go to a previous page when cancel button is clicked
   const goBack = () => {
-    navigate(-1);
+    navigate("/");
   };
 
   // Check if the selected date already exists in DB
@@ -53,9 +53,9 @@ const PlanLists = ({
     }
   };
 
-  return (
-    <>
-      {validCheck ? (
+  if (validCheck) {
+    return (
+      <>
         <div className="added-exercises">
           <h3 className="added-exercises-title">
             <i className="fa-solid fa-list-ul"></i> Added Exercises
@@ -67,50 +67,60 @@ const PlanLists = ({
             <div className="col">Weight(kg)</div>
             <div className="col">Delete</div>
           </div>
-          {finalList.map((list, index) => (
-            <div className="row row-cols-5" key={index}>
-              <div className="col">{list.name}</div>
-              <div className="col">{list.sets}</div>
-              <div className="col">{list.minutes}</div>
-              <div className="col">{list.weight}</div>
-              <div
-                className="col btn-delete-trash"
-                onClick={() => deleteList(index)}
-              >
-                <i className="fa-solid fa-trash-can"></i>
+          {finalList.length === 0 ? (
+            <>
+              <div className="noAdded-exercises-message">
+                There are no exercises added
               </div>
-            </div>
-          ))}
-          <div className="mb-3 btn-form-box">
-            <button
-              type="button"
-              className="btn btn-save"
-              onClick={() => handleSaveClick(finalList)}
-              style={{ display: finalList.length === 0 && "none" }}
-            >
-              Save
-            </button>
-            <button type="button" className="btn btn-cancel" onClick={goBack}>
-              Cancel
-            </button>
-          </div>
-          <div className="error-message">{error}</div>
+              <button type="button" className="btn btn-cancel" onClick={goBack}>
+                Cancel
+              </button>
+            </>
+          ) : (
+            <>
+              {finalList.map((list, index) => (
+                <div className="row row-cols-5" key={index}>
+                  <div className="col">{list.name}</div>
+                  <div className="col">{list.sets}</div>
+                  <div className="col">{list.minutes}</div>
+                  <div className="col">{list.weight}</div>
+                  <div
+                    className="col btn-delete-trash"
+                    onClick={() => deleteList(index)}
+                  >
+                    <i className="fa-solid fa-trash-can"></i>
+                  </div>
+                </div>
+              ))}
+              <div className="mb-3 btn-form-box">
+                <button
+                  type="button"
+                  className="btn btn-save"
+                  onClick={() => handleSaveClick(finalList)}
+                >
+                  Save
+                </button>
+                <button
+                  type="button"
+                  className="btn btn-cancel"
+                  onClick={goBack}
+                >
+                  Cancel
+                </button>
+              </div>
+              <div className="error-message">{error}</div>
+            </>
+          )}
         </div>
-      ) : (
-        <div className="mb-3 btn-form-box">
-          <button type="button" className="btn btn-cancel" onClick={goBack}>
-            Cancel
-          </button>
-        </div>
-      )}
-      <PlanModal
-        modalOpen={modalOpen}
-        setModalOpen={setModalOpen}
-        type={type}
-        message="Successfully saved!"
-      />
-    </>
-  );
+        <PlanModal
+          modalOpen={modalOpen}
+          setModalOpen={setModalOpen}
+          type={type}
+          message="Successfully saved!"
+        />
+      </>
+    );
+  }
 };
 
 PlanLists.propTypes = {
